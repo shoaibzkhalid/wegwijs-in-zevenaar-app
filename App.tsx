@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import 'react-native-gesture-handler'
+import { persistor, store } from 'store'
+import Toast from 'react-native-toast-message'
+import Routes from 'navigation/routes'
+import { toastConfig } from 'utils/toast'
+import { DarkThemeProvider } from 'DarkThemeProvider'
+import { Text } from 'react-native'
+import { Provider as PaperProvider } from 'react-native-paper'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
 
-export default function App() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const text = Text as any
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+text.defaultProps = (Text as any).defaultProps || {}
+text.defaultProps.allowFontScaling = false
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <PaperProvider>
+          <DarkThemeProvider>
+            <Routes />
+          </DarkThemeProvider>
+          {/* <Toast ref={(ref) => Toast.setRef(ref)} config={toastConfig} /> */}
+        </PaperProvider>
+      </PersistGate>
+    </Provider>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App

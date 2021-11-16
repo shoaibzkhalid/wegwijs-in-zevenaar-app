@@ -1,6 +1,23 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "allowJs": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "module": "esnext",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "paths": {
+      "*": ["src/*"],
+      "atoms/*": ["./src/components/atoms/*"],
+      "molecules/*": ["./src/components/molecules/*"],
+      "organisms/*": ["./src/components/organisms/*"],
+      "api/*": ["./src/store/api/*"],
+      "models": ["./src/models/*"],
+      "enums/*": ["./src/enums/*"],
+      "utils/*": ["./src/utils/*"]
+    }
+  },
+  "exclude": ["node_modules", "metro.config.js"],
+  "types": ["styled-components-react-native"]
 }
