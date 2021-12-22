@@ -1,0 +1,69 @@
+{
+  "builds": {
+    "android": {
+      "base": {
+        "image": "default",
+        "env": {
+          "EXAMPLE_ENV": "example value"
+        }
+      },
+      "release": {
+        "extends": "base",
+        "env": {
+          "ENVIRONMENT": "production"
+        },
+        "buildType": "app-bundle"
+      },
+      "staging": {
+        "extends": "base",
+        "env": {
+          "ENVIRONMENT": "staging"
+        },
+        "distribution": "internal",
+        "buildType": "apk"
+      },
+      "debug": {
+        "extends": "base",
+        "withoutCredentials": true,
+        "env": {
+          "ENVIRONMENT": "staging"
+        },
+        "distribution": "internal",
+        "buildType": "development-client"
+      }
+    },
+    "ios": {
+      "base": {
+        "image": "latest",
+        "node": "12.13.0",
+        "yarn": "1.22.5"
+      },
+      "release": {
+        "extends": "base",
+        "buildType": "release",
+        "env": {
+          "ENVIRONMENT": "production"
+        },
+      },
+      "inhouse": {
+        "extends": "base",
+        "distribution": "internal",
+        "enterpriseProvisioning": "universal",
+        "env": {
+          "ENVIRONMENT": "staging"
+        }
+      },
+      "adhoc": {
+        "extends": "base",
+        "distribution": "internal",
+        "env": {
+          "ENVIRONMENT": "staging"
+        }
+      },
+      "client": {
+        "extends": "adhoc",
+        "buildType": "development-client"
+      }
+    }
+  }
+}

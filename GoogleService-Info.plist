@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>886985861328-c2rva721ol1293i60rc5a37pj85kvab0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.886985861328-c2rva721ol1293i60rc5a37pj85kvab0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCab45AHia693knrZCYvGDdpr4sPWcMHhs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>886985861328</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>WMoGuide.nl.WegwijsInZevenaar</string>
+	<key>PROJECT_ID</key>
+	<string>wegwijs-in-zevenaar-73ec4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wegwijs-in-zevenaar-73ec4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:886985861328:ios:3569271ff0f1e567e556d5</string>
+</dict>
+</plist>

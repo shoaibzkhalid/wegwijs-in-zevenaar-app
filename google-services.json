@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "886985861328",
+    "project_id": "wegwijs-in-zevenaar-73ec4",
+    "storage_bucket": "wegwijs-in-zevenaar-73ec4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886985861328:android:52c95c3dea250cbbe556d5",
+        "android_client_info": {
+          "package_name": "nl.moguide.wegwijsinzevenaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886985861328-n8eb72hfgc1k3goh0k1mre9vjr2cjqa8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNORpqWu-516dxCDry5wfLHNpGLaZ_iNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886985861328-n8eb72hfgc1k3goh0k1mre9vjr2cjqa8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
