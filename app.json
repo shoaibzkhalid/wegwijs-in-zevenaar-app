@@ -24,10 +24,7 @@
       "assetExts": ["ttf"]
     },
     "androidStatusBarColor": "#334393",
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#334393"
-    },
+
     "version": "2.0.25",
     "platforms": ["android", "ios"],
     "updates": {

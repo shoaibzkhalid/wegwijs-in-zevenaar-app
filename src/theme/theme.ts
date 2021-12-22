@@ -18,9 +18,10 @@ export const darkTheme = {
     notification: COLORS.screenBgColorDark,
   },
 }
+
 export const lightTheme: DefaultTheme = {
   txtColor: COLORS.white,
-  bgColor: COLORS.white,
+  bgColor: COLORS.primary,
   shadowColor: COLORS.shadowColor,
   navColor: COLORS.black,
 

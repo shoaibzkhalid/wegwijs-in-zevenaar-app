@@ -17,6 +17,8 @@ const Routes = () => {
 
   if (!fontsLoaded) return <AppLoading />
 
+  console.log('appTheme', appTheme)
+
   return (
     <NavigationContainer theme={appTheme ? darkTheme : lightTheme}>
       <Stack.Navigator screenOptions={stackOptions}>

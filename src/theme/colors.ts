@@ -5,7 +5,7 @@ export const COLORS = {
 
   blue: '#0112FE',
 
-  screenBgColor: '#FAFAFA',
+  screenBgColor: '#939751',
 
   secondary: '#808080', // gray
 
