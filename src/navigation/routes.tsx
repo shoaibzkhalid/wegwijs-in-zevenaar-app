@@ -7,7 +7,7 @@ import { useSettings } from 'utils/hooks'
 import { darkTheme, lightTheme } from 'theme/theme'
 import { RootStackParamList } from 'models/navigation'
 import { stackOptions } from 'utils'
-import { Home } from 'screens'
+import { Home, SubjectList, NewsList } from 'screens'
 import { useExpoFonts } from 'utils/hooks/useExpoFonts'
 
 const Routes = () => {
@@ -23,6 +23,8 @@ const Routes = () => {
     <NavigationContainer theme={appTheme ? darkTheme : lightTheme}>
       <Stack.Navigator screenOptions={stackOptions}>
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="NewsList" component={NewsList} />
+        <Stack.Screen name="SubjectList" component={SubjectList} />
       </Stack.Navigator>
     </NavigationContainer>
   )
