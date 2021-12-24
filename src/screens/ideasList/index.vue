@@ -1,9 +1,8 @@
 <template>
   <nb-container :style="{ backgroundColor: '#939751' }">
-    <header :navigation="this.props.navigation" back="ActivityOrIdea" />
     <nb-content padder>
       <nb-h2 class="category-title">{{ item.title }}</nb-h2>
-      <nb-text class="category-desc">U vindt hier ideeën van de gemeenschap om samen het wonen en leven in de gemeente nog mooier te maken. Misschien kunt u helpen een of meerdere ideeën te realiseren. U heeft ook de mogelijkheid om als inwoner, buurt of groep een mooi idee in te dienen.</nb-text>
+      <nb-text class="category-desc"></nb-text>
       <touchable-opacity
         v-for="post in item.post"
         :key="post.id"
@@ -29,7 +28,7 @@
                     resizeMode="contain"
                 /></nb-col>
                 <nb-col :size="4"
-                  ><nb-text class="post-desc" style="padding-left: 15;">{{
+                  ><nb-text class="post-desc" style="padding-left: 15">{{
                     getSubString(post.attributes.short_description)
                   }}</nb-text></nb-col
                 >
@@ -42,7 +41,9 @@
         <nb-card-item>
           <nb-body>
             <nb-text class="post-title">Heeft u zelf een leuk idee?</nb-text>
-              <nb-text class="post-desc">Ga naar de website www.wegwijsinzevenaar.nl en dien je idee in.</nb-text>
+            <nb-text class="post-desc"
+              >Ga naar de website www.wegwijsinzevenaar.nl en dien je idee in.</nb-text
+            >
           </nb-body>
         </nb-card-item>
       </nb-card>
@@ -51,75 +52,49 @@
 </template>
 
 <script>
-import Header from "../../components/header";
-import HTML from "react-native-render-html";
-import axios from "axios";
+import Header from '../../components/header'
+import HTML from 'react-native-render-html'
+import axios from 'axios'
 
 export default {
   components: {
     Header,
-    HTML
+    HTML,
   },
   methods: {
     getSubString(string) {
-      const LIMIT = 150;
-      if (string.length > LIMIT) return string.substring(0, LIMIT) + "...";
-      else return string;
-    }
+      const LIMIT = 150
+      if (string.length > LIMIT) return string.substring(0, LIMIT) + '...'
+      else return string
+    },
   },
   props: {
-    navigation: Object
+    navigation: Object,
   },
   data() {
     return {
       item: {
-        id: "1",
-        title: "Ideeën",
-        description: "Korte omschrijving op deze plek",
-        post: [
-          // {
-          //   id: "1",
-          //   published_date: "12-05-2021",
-          //   title: "Brandweer op zoek naar nieuwe leden",
-          //   image: newsImage,
-          //   description:
-          //     "Zevenaar - Diverse brandweerposten in de regio zijn dringend op zoek naar nieuwe leden. Zowel mannen als vrouwen kunnen hiervoor in aanmerking komen. Ben je be nieuwd wat het inhoudt om een brandweer man/-vrouw te zijn en wat je daarvoor moet doen? Kijk dan op bijdebrandweer.nl voor informatie"
-          // },
-          // {
-          //   id: "2",
-          //   published_date: "12-05-2021",
-          //   title: "Denk mee over de buitenruimte in Zevenaar",
-          //   image: newsImage,
-          //   description:
-          //     "Zevenaar - Diverse brandweerposten in de regio zijn dringend op zoek naar nieuwe leden. Zowel mannen als vrouwen kunnen hiervoor in aanmerking komen. Ben je be nieuwd wat het inhoudt om een brandweer man/-vrouw te zijn en wat je daarvoor moet doen? Kijk dan op bijdebrandweer.nl voor informatie"
-          // },
-          // {
-          //   id: "3",
-          //   published_date: "12-05-2021",
-          //   title: "Denk mee over de buitenruimte in Zevenaar",
-          //   image: newsImage,
-          //   description:
-          //     "Zevenaar - Diverse brandweerposten in de regio zijn dringend op zoek naar nieuwe leden. Zowel mannen als vrouwen kunnen hiervoor in aanmerking komen. Ben je be nieuwd wat het inhoudt om een brandweer man/-vrouw te zijn en wat je daarvoor moet doen? Kijk dan op bijdebrandweer.nl voor informatie"
-          // }
-        ]
-      }
-    };
+        id: '1',
+        title: 'Ideeën',
+        description: 'Korte omschrijving op deze plek',
+        post: [],
+      },
+    }
   },
   mounted() {
     axios({
-      method: "GET",
-      url:
-        "https://wegwijs-in-zevenaar-platform-dev-pw24i.ondigitalocean.app/api/v1/ideas"
+      method: 'GET',
+      url: 'https://wegwijs-in-zevenaar-platform-dev-pw24i.ondigitalocean.app/api/v1/ideas',
     }).then(
-      result => {
-        this.item.post = result.data?.data ?? [];
+      (result) => {
+        this.item.post = result.data?.data ?? []
       },
-      error => {
-        console.error(error);
+      (error) => {
+        console.error(error)
       }
-    );
-  }
-};
+    )
+  },
+}
 </script>
 
 <style>

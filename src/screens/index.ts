@@ -13,3 +13,6 @@ export { Contact } from './contact'
 export { IdeaDetail } from './ideaDetail'
 export { ActivityDetail } from './activityDetail'
 export { ActivityChoose } from './activityChoose'
+
+export { ActivityCalendar } from './activityCalendar'
+export { ActivitiesList } from './activitiesList'

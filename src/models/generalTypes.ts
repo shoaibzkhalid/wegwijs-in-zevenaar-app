@@ -33,6 +33,7 @@ export interface HomeOption {
   icon: ImageSourcePropType
   activeIcon: string
   screenName: keyof RootStackParamList
-  subject: Subject
+  subject?: Subject
   url?: string
+  target?: any
 }

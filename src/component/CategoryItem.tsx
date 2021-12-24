@@ -12,11 +12,11 @@ type Props = {
 }
 
 export const CategoryItem: React.FC<Props> = ({ data }) => {
-  const { icon, title, subject, screenName } = data
+  const { icon, title, subject, screenName, target } = data
   const { navigation } = useAppNavigation()
 
   return (
-    <Item onPress={() => navigation.navigate(screenName, subject)}>
+    <Item onPress={() => navigation.navigate(screenName, { subject, target })}>
       <ItemIcon source={icon} />
       <ItemText>{title}</ItemText>
     </Item>

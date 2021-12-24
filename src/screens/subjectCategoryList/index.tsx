@@ -4,13 +4,14 @@ import React, { Fragment } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { COLORS } from 'theme'
-import { TextHuge, TextMedium } from 'theme/common.styles'
+import { Heading, TextHuge, TextMedium } from 'theme/common.styles'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen'
 import { useOrganizations } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
+import { ScrollView } from 'react-native-gesture-handler'
 
 export const SubjectCategoryList = () => {
   const { navigation } = useAppNavigation()
@@ -20,46 +21,59 @@ export const SubjectCategoryList = () => {
 
   return (
     <Wrapper>
-      <TextHuge color={COLORS.white} style={{ padding: 10 }}>
-        {category.name} - {subject.title}
-      </TextHuge>
-      {category.short_description && (
-        <TextMedium style={{ padding: 10 }}>{category.short_description}</TextMedium>
-      )}
+      <ScrollView style={{ marginBottom: hp(15) }}>
+        <Heading>
+          {category.name} - {subject.title}
+        </Heading>
+        {category.short_description && (
+          <TextMedium style={{ padding: 10, color: 'white' }}>
+            {category.short_description}
+          </TextMedium>
+        )}
 
-      <Tags>
-        {category.children.length > 0 &&
-          category.children.map((c, index) => (
-            <TouchableOpacity key={index}>
-              <TagCard>
-                <TextMedium>{c.name}</TextMedium>
-              </TagCard>
-            </TouchableOpacity>
-          ))}
-      </Tags>
-
-      <View>
-        <TextMedium style={{ padding: 10, paddingBottom: 0 }}>Organisaties</TextMedium>
-
-        {organizations.length > 0 ? (
-          <Fragment>
-            {organizations.map((organization, index) => (
+        <Tags>
+          {category.children.length > 0 &&
+            category.children.map((tag, index) => (
               <TouchableOpacity
                 key={index}
                 onPress={() =>
-                  navigation.navigate('OrganizationDetail', {
-                    organization,
+                  navigation.navigate('SubjectCategoryTagList', {
+                    tag,
+                    subject,
+                    category,
                   })
                 }
               >
-                <NewsCard>
-                  <TextMedium>{organization.attributes.name}</TextMedium>
-                </NewsCard>
+                <TagCard>
+                  <TextMedium>{tag.name}</TextMedium>
+                </TagCard>
               </TouchableOpacity>
             ))}
-          </Fragment>
-        ) : null}
-      </View>
+        </Tags>
+
+        <View>
+          <Heading style={{ padding: 10, paddingBottom: 0 }}>Organisaties</Heading>
+
+          {organizations.length > 0 ? (
+            <Fragment>
+              {organizations.map((organization, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() =>
+                    navigation.navigate('OrganizationDetail', {
+                      organization,
+                    })
+                  }
+                >
+                  <NewsCard>
+                    <TextMedium>{organization.attributes.name}</TextMedium>
+                  </NewsCard>
+                </TouchableOpacity>
+              ))}
+            </Fragment>
+          ) : null}
+        </View>
+      </ScrollView>
     </Wrapper>
   )
 }

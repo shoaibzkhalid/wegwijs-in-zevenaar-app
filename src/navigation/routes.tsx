@@ -20,9 +20,11 @@ import {
   IdeaDetail,
   Contact,
   SubjectCategoryTagList,
+  ActivitiesList,
+  ActivityCalendar,
+  OrganizationDetail,
 } from 'screens'
 import { useExpoFonts } from 'utils/hooks/useExpoFonts'
-import { OrganizationDetail } from 'screens/organizationDetail'
 
 const Routes = () => {
   const Stack = createStackNavigator<RootStackParamList>()
@@ -52,6 +54,8 @@ const Routes = () => {
 
         <Stack.Screen name="Contact" component={Contact} />
         <Stack.Screen name="SubjectCategoryTagList" component={SubjectCategoryTagList} />
+        <Stack.Screen name="ActivityCalendar" component={ActivityCalendar} />
+        <Stack.Screen name="ActivitiesList" component={ActivitiesList} />
       </Stack.Navigator>
     </NavigationContainer>
   )

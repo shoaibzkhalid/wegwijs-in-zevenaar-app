@@ -2,6 +2,7 @@ import { COLORS } from './colors'
 import { SIZES } from './sizes'
 import { FONTS } from './fonts'
 import styled, { css } from 'styled-components/native'
+import { Headline } from 'react-native-paper'
 
 type PaddedViewTypes = {
   fullWidth?: boolean
@@ -373,4 +374,27 @@ export const ItemGrid = styled.View`
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 5px;
+`
+
+export const NewsCard = styled.View`
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+`
+export const Heading = styled(Headline)`
+  color: ${COLORS.white};
+  padding: 10px 7px;
+  padding-bottom: 5px;
+  font-weight: bold;
+`
+export const BoldText = styled(TextMedium)`
+  font-weight: bold;
+`
+
+export const ParaText = styled(TextMedium)`
+  padding: 10px;
+  padding-top: 0px;
+  color: white;
 `

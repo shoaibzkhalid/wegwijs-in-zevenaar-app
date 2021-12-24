@@ -12,7 +12,6 @@ const Wrapper: React.FC<Props> = ({ children }) => {
     <View>
       <Header />
       {children}
-      <Footer />
     </View>
   )
 }

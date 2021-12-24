@@ -21,6 +21,8 @@ export type RootStackParamList = {
   IdeaDetail: any
   ActivityDetail: any
   ActivityChoose: any
+  ActivitiesList: any
+  ActivityCalendar: any
 }
 
 export type Props = StackScreenProps<RootStackParamList, 'Home'>

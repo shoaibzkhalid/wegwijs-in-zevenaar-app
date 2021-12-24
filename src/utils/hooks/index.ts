@@ -1,18 +1,23 @@
+import { useEffect } from 'react'
+import { LocaleConfig } from 'react-native-calendars'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'store'
-import { useGetCategoriesQuery, useGetOrganizationsQuery } from 'store/api'
+import {
+  useGetActivitiesByTargetGrpQuery,
+  useGetCategoriesQuery,
+  useGetIdeasQuery,
+  useGetOrganizationsQuery,
+} from 'store/api'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useCategories = (selectedCategory) => {
-  const { data } = useGetCategoriesQuery({})
-
-  console.log('data', data)
+  const { data, isLoading } = useGetCategoriesQuery({})
 
   const selectedCategories = data?.filter((category) => category.id == selectedCategory)[0]
 
-  return { selectedCategories }
+  return { selectedCategories, isLoading }
 }
 
 export const useOrganizations = (categoryId) => {
@@ -23,8 +28,68 @@ export const useOrganizations = (categoryId) => {
   return { organizations } as any
 }
 
+export const useIdeas = () => {
+  const { data } = useGetIdeasQuery({})
+
+  const ideas = data ?? []
+
+  return { ideas } as any
+}
+
 export const useSettings = () => {
   const appTheme = useAppSelector((state) => state.settings)
 
   return { appTheme }
+}
+
+export const useCalenderLocales = () => {
+  useEffect(() => {
+    LocaleConfig.locales.nl = {
+      monthNames: [
+        'Januari',
+        'Februari',
+        'Maart',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Augustus',
+        'September',
+        'Oktober',
+        'November',
+        'December',
+      ],
+      monthNamesShort: [
+        'Jan',
+        'Feb',
+        'Mrt',
+        'Apr',
+        'Mei',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Okt',
+        'Nov',
+        'Dec',
+      ],
+      dayNames: [
+        'Zondag',
+        'Maandag',
+        'Dinsdag',
+        'Woensdag',
+        'Donderdag',
+        'Vrijdag',
+        'Zaterdag',
+      ],
+      dayNamesShort: ['Zo', 'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za'],
+    }
+    LocaleConfig.defaultLocale = 'nl'
+  }, [])
+}
+
+export const useActivities = (group) => {
+  const { data } = useGetActivitiesByTargetGrpQuery(group)
+  const activities = data ?? []
+  return { activities } as any
 }

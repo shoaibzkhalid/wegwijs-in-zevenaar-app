@@ -116,17 +116,75 @@ export const homeOptions: HomeOption[] = [
   },
 ]
 
-export const activityOrIdea = [
+export const activityOrIdea: HomeOption[] = [
   {
     id: '14',
     title: 'ACTIVITEITEN',
     icon: IMAGES.icon3,
     activeIcon: IMAGES.icon3_hover,
+    screenName: 'ActivityChoose',
+    subject: null,
   },
   {
     id: '11',
     title: 'IDEEËN',
     icon: IMAGES.icon11,
     activeIcon: IMAGES.icon11_hover,
+    screenName: 'IdeasList',
+    subject: null,
+  },
+]
+
+export const activityChooseOptions: HomeOption[] = [
+  {
+    id: '15',
+    title: 'Kalender',
+    icon: IMAGES.icon3,
+    activeIcon: IMAGES.icon3_hover,
+    screenName: 'ActivityCalendar',
+  },
+  {
+    id: '16',
+    title: 'Alle leeftijden',
+    icon: IMAGES.icon3,
+    activeIcon: IMAGES.icon3_hover,
+    screenName: 'ActivitiesList',
+    target: {
+      targetGroup: null,
+      targetGroupText: 'Alle leeftijden',
+    },
+  },
+  {
+    id: '17',
+    title: '0-25 jaar',
+    icon: IMAGES.icon3,
+    activeIcon: IMAGES.icon3_hover,
+    screenName: 'ActivitiesList',
+    target: {
+      targetGroup: '0-25',
+      targetGroupText: '0-25 jaar',
+    },
+  },
+  {
+    id: '18',
+    title: '25-55 jaar',
+    icon: IMAGES.icon3,
+    activeIcon: IMAGES.icon3_hover,
+    screenName: 'ActivitiesList',
+    target: {
+      targetGroup: '25-55',
+      targetGroupText: '25-55 jaar',
+    },
+  },
+  {
+    id: '19',
+    title: '55 jaar en ouder',
+    icon: IMAGES.icon3,
+    activeIcon: IMAGES.icon3_hover,
+    screenName: 'ActivitiesList',
+    target: {
+      targetGroup: '55+',
+      targetGroupText: '55 jaar en ouder',
+    },
   },
 ]

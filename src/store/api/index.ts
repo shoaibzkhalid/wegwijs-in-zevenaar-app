@@ -11,24 +11,31 @@ export const wegwijsApi = createApi({
       transformResponse: (response: any) => response.data,
     }),
 
-    // GET IDEAS
-    getIdeas: build.query({
-      query: () => ({ url: `ideas` }),
-    }),
-
     // GET GENERAL
     getGeneral: build.query({
       query: () => ({ url: `general` }),
     }),
 
-    // GET ACTIVITIES
+    // GET ACTIVITIES BY TARGET GROUP
+    getActivitiesByTargetGrp: build.query({
+      query: (group) => ({ url: `activities?filter[target_group]=${group ?? ''}` }),
+      transformResponse: (response: any) => response.data,
+    }),
+
     getActivities: build.query({
       query: () => ({ url: `activities?filter[date]=` }),
+      transformResponse: (response: any) => response.data,
     }),
 
     // GET ORGANIZATIONS
     getOrganizations: build.query({
       query: (categoryId) => ({ url: `organizations?filter[category]=${categoryId}` }),
+      transformResponse: (response: any) => response.data,
+    }),
+
+    // GET IDEAS
+    getIdeas: build.query({
+      query: () => ({ url: `ideas` }),
       transformResponse: (response: any) => response.data,
     }),
   }),
@@ -40,4 +47,5 @@ export const {
   useGetGeneralQuery,
   useGetCategoriesQuery,
   useGetOrganizationsQuery,
+  useGetActivitiesByTargetGrpQuery,
 } = wegwijsApi

@@ -10,6 +10,8 @@ import { CustomIcon } from './CustomIcon'
 export const Header = () => {
   const { navigation } = useAppNavigation()
 
+  console.log('goBack', navigation.canGoBack())
+
   return (
     <SafeAreaView style={{ backgroundColor: 'white' }}>
       <HeaderView>
@@ -31,22 +33,18 @@ export const Header = () => {
 }
 
 const HeaderView = styled.View`
-  height: 70px;
+  height: 55px;
   background-color: white;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  margin: 5px;
 `
 
 const HeaderLeft = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-`
-
-const HeaderIcon = styled.Image`
-  color: #4a4b28;
-  font-size: 38px;
 `
 
 const LogoImage = styled.Image`
@@ -56,7 +54,6 @@ const LogoImage = styled.Image`
 
 const BackText = styled.Text`
   font-size: 25px;
-  /* font-weight: 600px; */
   padding-top: 5px;
   color: #4a4b28;
   margin: 0;

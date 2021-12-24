@@ -7,6 +7,7 @@ import styled from 'styled-components/native'
 import { homeOptions } from 'utils/hooks/constants'
 import { ItemGrid } from 'theme/common.styles'
 import Wrapper from 'component/Wrapper'
+import { Footer } from 'component/Footer'
 
 export const Home = () => {
   return (
@@ -16,6 +17,7 @@ export const Home = () => {
           <CategoryItem data={option} key={option.title} />
         ))}
       </ItemGrid>
+      <Footer />
     </Wrapper>
   )
 }
