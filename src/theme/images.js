@@ -20,7 +20,16 @@ import icon7_hover from '../../assets/icon7_hover.png'
 import icon8_hover from '../../assets/icon8_hover.png'
 import icon9_hover from '../../assets/icon9_hover.png'
 
+import mapMarkerIcon from '../../assets/map-marker-alt-solid.png'
+import envelopeIcon from '../../assets/envelope-solid.png'
+import phoneIcon from '../../assets/phone-alt-solid.png'
+import globeIcon from '../../assets/globe-europe-solid.png'
+
 export const IMAGES = {
+  mapMarkerIcon,
+  envelopeIcon,
+  phoneIcon,
+  globeIcon,
   logo,
   hambeger,
   icon1,

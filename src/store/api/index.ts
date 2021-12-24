@@ -6,32 +6,30 @@ export const wegwijsApi = createApi({
   baseQuery: createBaseQuery(),
   endpoints: (build) => ({
     // GET CATEGORIES
-    getCategories: build.query<any[], void | any>({
+    getCategories: build.query({
       query: () => ({ url: `categories` }),
-      transformResponse: (response: any) => {
-        console.log('response', response)
-        return response.data ?? []
-      },
+      transformResponse: (response: any) => response.data,
     }),
 
     // GET IDEAS
-    getIdeas: build.query<any[], void | any>({
+    getIdeas: build.query({
       query: () => ({ url: `ideas` }),
     }),
 
     // GET GENERAL
-    getGeneral: build.query<any[], void | any>({
+    getGeneral: build.query({
       query: () => ({ url: `general` }),
     }),
 
     // GET ACTIVITIES
-    getActivities: build.query<any[], void | any>({
-      query: () => ({ url: `activities` }),
+    getActivities: build.query({
+      query: () => ({ url: `activities?filter[date]=` }),
     }),
 
     // GET ORGANIZATIONS
-    getOrganizations: build.query<any[], void | any>({
-      query: () => ({ url: `organizations` }),
+    getOrganizations: build.query({
+      query: (categoryId) => ({ url: `organizations?filter[category]=${categoryId}` }),
+      transformResponse: (response: any) => response.data,
     }),
   }),
 })

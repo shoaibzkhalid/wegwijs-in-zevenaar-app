@@ -7,12 +7,15 @@ import { Headline, Subheading } from 'react-native-paper'
 import styled from 'styled-components/native'
 import { COLORS } from 'theme'
 import { useCategories } from 'utils/hooks'
+import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 
 export const SubjectList = () => {
-  const { title, description, id } = useRoute().params as Subject
+  const subject = useRoute().params
+  const { title, description, id } = subject as Subject
+  const { navigation } = useAppNavigation()
 
   const { selectedCategories } = useCategories(id)
-  console.log('data', selectedCategories)
+  // console.log('data', selectedCategories)
 
   return (
     <Wrapper>
@@ -23,7 +26,15 @@ export const SubjectList = () => {
       selectedCategories.attributes &&
       selectedCategories.attributes.children
         ? selectedCategories.attributes.children.map((category, index) => (
-            <TouchableOpacity key={index}>
+            <TouchableOpacity
+              key={index}
+              onPress={() =>
+                navigation.navigate('SubjectCategoryList', {
+                  category,
+                  subject,
+                })
+              }
+            >
               <NewsCard>
                 <PostTitle>{category.name}</PostTitle>
               </NewsCard>

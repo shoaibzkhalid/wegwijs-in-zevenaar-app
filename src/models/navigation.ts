@@ -10,6 +10,9 @@ export type RootStackParamList = {
   Home: undefined
   NewsList: undefined
   SubjectList: Subject
+  SubjectCategoryList: any
+  OrganizationsList: any
+  OrganizationDetail: any
 }
 
 export type Props = StackScreenProps<RootStackParamList, 'Home'>
