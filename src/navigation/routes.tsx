@@ -7,7 +7,20 @@ import { useSettings } from 'utils/hooks'
 import { darkTheme, lightTheme } from 'theme/theme'
 import { RootStackParamList } from 'models/navigation'
 import { stackOptions } from 'utils'
-import { Home, SubjectList, NewsList, SubjectCategoryList, OrganizationsList } from 'screens'
+import {
+  Home,
+  SubjectList,
+  NewsList,
+  SubjectCategoryList,
+  OrganizationsList,
+  ActivityOrIdea,
+  IdeasList,
+  ActivityChoose,
+  ActivityDetail,
+  IdeaDetail,
+  Contact,
+  SubjectCategoryTagList,
+} from 'screens'
 import { useExpoFonts } from 'utils/hooks/useExpoFonts'
 import { OrganizationDetail } from 'screens/organizationDetail'
 
@@ -29,6 +42,16 @@ const Routes = () => {
         <Stack.Screen name="SubjectCategoryList" component={SubjectCategoryList} />
         <Stack.Screen name="OrganizationDetail" component={OrganizationDetail} />
         <Stack.Screen name="OrganizationsList" component={OrganizationsList} />
+
+        <Stack.Screen name="ActivityOrIdea" component={ActivityOrIdea} />
+        <Stack.Screen name="IdeasList" component={IdeasList} />
+
+        <Stack.Screen name="ActivityChoose" component={ActivityChoose} />
+        <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
+        <Stack.Screen name="IdeaDetail" component={IdeaDetail} />
+
+        <Stack.Screen name="Contact" component={Contact} />
+        <Stack.Screen name="SubjectCategoryTagList" component={SubjectCategoryTagList} />
       </Stack.Navigator>
     </NavigationContainer>
   )

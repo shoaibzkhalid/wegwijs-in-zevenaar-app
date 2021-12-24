@@ -1,7 +1,8 @@
 import { HomeOption } from 'models/generalTypes'
 import { IMAGES } from 'theme'
 
-export const API_URL = 'https://wegwijs-in-zevenaar-platform-dev-pw24i.ondigitalocean.app/api/v1/'
+export const API_URL =
+  'https://wegwijs-in-zevenaar-platform-dev-pw24i.ondigitalocean.app/api/v1/'
 
 export const homeOptions: HomeOption[] = [
   {
@@ -20,7 +21,7 @@ export const homeOptions: HomeOption[] = [
     activeIcon: IMAGES.icon3_hover,
     url: 'Activity',
     subject: null,
-    screenName: null,
+    screenName: 'ActivityOrIdea',
   },
   {
     id: '4',
@@ -87,7 +88,8 @@ export const homeOptions: HomeOption[] = [
     subject: {
       id: '2',
       title: 'Opgroeien & Opvoeden',
-      description: 'Informatie dat kan helpen bij het opvoeden en groeiontwikkeling van kinderen',
+      description:
+        'Informatie dat kan helpen bij het opvoeden en groeiontwikkeling van kinderen',
       post: {},
     },
   },
@@ -110,6 +112,21 @@ export const homeOptions: HomeOption[] = [
     icon: IMAGES.icon2,
     activeIcon: IMAGES.icon2_hover,
     subject: null,
-    screenName: null,
+    screenName: 'OrganizationsList',
+  },
+]
+
+export const activityOrIdea = [
+  {
+    id: '14',
+    title: 'ACTIVITEITEN',
+    icon: IMAGES.icon3,
+    activeIcon: IMAGES.icon3_hover,
+  },
+  {
+    id: '11',
+    title: 'IDEEËN',
+    icon: IMAGES.icon11,
+    activeIcon: IMAGES.icon11_hover,
   },
 ]

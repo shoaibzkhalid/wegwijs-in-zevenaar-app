@@ -5,7 +5,7 @@ import { View, Text } from 'react-native'
 export const NewsList = () => {
   return (
     <Wrapper>
-      <Text>NewsList</Text>
+      <Text> </Text>
     </Wrapper>
   )
 }

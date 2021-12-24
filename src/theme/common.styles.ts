@@ -296,7 +296,8 @@ export const FilterOptionContainer = styled.View`
 `
 
 export const FilterOption = styled.TouchableOpacity<FilterOptionType>`
-  background-color: ${({ highlight }) => `${highlight ? COLORS.lightPrimary : COLORS.lightGray}`};
+  background-color: ${({ highlight }) =>
+    `${highlight ? COLORS.lightPrimary : COLORS.lightGray}`};
   border-color: ${({ highlight }) => `${highlight ? COLORS.primary : COLORS.lightGray}`};
   border-width: 1px;
   border-radius: ${SIZES.radius}px;
@@ -363,4 +364,13 @@ export const TouchableWhiteCard = styled.TouchableOpacity`
   border-radius: ${SIZES.radius}px;
   padding: 10px;
   margin-bottom: 10px;
+`
+
+export const ItemGrid = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 5px;
 `

@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { View, Text } from 'react-native'
+import { Footer } from './Footer'
 import { Header } from './Header'
 
 type Props = {
@@ -11,6 +12,7 @@ const Wrapper: React.FC<Props> = ({ children }) => {
     <View>
       <Header />
       {children}
+      <Footer />
     </View>
   )
 }

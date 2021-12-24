@@ -13,6 +13,14 @@ export type RootStackParamList = {
   SubjectCategoryList: any
   OrganizationsList: any
   OrganizationDetail: any
+
+  IdeasList: any
+  ActivityOrIdea: any
+  SubjectCategoryTagList: any
+  Contact: any
+  IdeaDetail: any
+  ActivityDetail: any
+  ActivityChoose: any
 }
 
 export type Props = StackScreenProps<RootStackParamList, 'Home'>
