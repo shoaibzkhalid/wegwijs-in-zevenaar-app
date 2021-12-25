@@ -24,10 +24,8 @@ export const CategoryItem: React.FC<Props> = ({ data }) => {
 }
 
 const Item = styled.TouchableOpacity`
-  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   text-align: center;
   margin-left: 5px;
   margin-right: 5px;

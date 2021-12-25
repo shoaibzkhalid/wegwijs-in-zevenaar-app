@@ -3,10 +3,13 @@ import { LocaleConfig } from 'react-native-calendars'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'store'
 import {
+  useGetActivitiesByDateQuery,
   useGetActivitiesByTargetGrpQuery,
   useGetCategoriesQuery,
   useGetIdeasQuery,
+  useGetNewsQuery,
   useGetOrganizationsQuery,
+  useGetOrgBySearchValQuery,
 } from 'store/api'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
@@ -92,4 +95,22 @@ export const useActivities = (group) => {
   const { data } = useGetActivitiesByTargetGrpQuery(group)
   const activities = data ?? []
   return { activities } as any
+}
+
+export const useActivitiesByDate = (date) => {
+  const { data } = useGetActivitiesByDateQuery(date ?? '')
+  const activities = data ?? []
+  return { activities } as any
+}
+
+export const useNews = () => {
+  const { data } = useGetNewsQuery({})
+  const news = data ?? []
+  return { news } as any
+}
+
+export const useOrganizationsBySearchVal = (searchValue) => {
+  const { data, isLoading } = useGetOrgBySearchValQuery(searchValue)
+  const organizations = data ?? []
+  return { organizations, isLoading } as any
 }

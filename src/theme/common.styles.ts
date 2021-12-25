@@ -368,9 +368,7 @@ export const TouchableWhiteCard = styled.TouchableOpacity`
 `
 
 export const ItemGrid = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 5px;
@@ -383,6 +381,14 @@ export const NewsCard = styled.View`
   margin: 10px;
   padding: 10px;
 `
+export const TouchCard = styled.TouchableOpacity`
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+`
+
 export const Heading = styled(Headline)`
   color: ${COLORS.white};
   padding: 10px 7px;

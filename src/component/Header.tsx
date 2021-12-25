@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { View, Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -10,10 +11,8 @@ import { CustomIcon } from './CustomIcon'
 export const Header = () => {
   const { navigation } = useAppNavigation()
 
-  console.log('goBack', navigation.canGoBack())
-
   return (
-    <SafeAreaView style={{ backgroundColor: 'white' }}>
+    <SafeAreaView>
       <HeaderView>
         <HeaderLeft>
           <CustomIcon name="menu" size={40} />
@@ -38,7 +37,6 @@ const HeaderView = styled.View`
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  margin: 5px;
 `
 
 const HeaderLeft = styled.View`

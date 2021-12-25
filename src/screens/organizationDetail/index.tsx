@@ -58,7 +58,7 @@ export const OrganizationDetail = () => {
         )}
 
         {organization.attributes.description && (
-          <Headline>{organization.attributes.information_title}</Headline>
+          <Heading>{organization.attributes.information_title}</Heading>
         )}
 
         {organization.attributes.information_description && (

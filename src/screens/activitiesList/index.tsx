@@ -1,10 +1,12 @@
 import { useRoute } from '@react-navigation/native'
 import Wrapper from 'component/Wrapper'
+import dayjs, { Dayjs } from 'dayjs'
 import React from 'react'
 import { Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import { BoldText, Heading, NewsCard, ParaText } from 'theme/common.styles'
+import { COLORS } from 'theme'
+import { BoldText, Heading, NewsCard, ParaText, TextMedium } from 'theme/common.styles'
 import { getSubString } from 'utils'
 import { useActivities } from 'utils/hooks'
 
@@ -43,14 +45,15 @@ export const ActivitiesList = () => {
           return (
             <NewsCard key={index}>
               <BoldText>{name}</BoldText>
-              <Text>
-                Op {start_date} van {start_time} tot {end_time}
-              </Text>
-              <Text>{getSubString(short_description)}</Text>
+              <TextMedium style={{ color: COLORS.primary }}>
+                Op {dayjs(start_date).format('DD-MM-YYYY')} van{' '}
+                {dayjs(start_time).format('HH:mm')} tot {dayjs(end_time).format('HH:mm')}
+              </TextMedium>
+              <TextMedium>{getSubString(short_description)}</TextMedium>
 
-              <Text>
+              <TextMedium>
                 Adres: {street} {house_number} {city}
-              </Text>
+              </TextMedium>
             </NewsCard>
           )
         })}

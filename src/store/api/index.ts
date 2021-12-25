@@ -22,8 +22,8 @@ export const wegwijsApi = createApi({
       transformResponse: (response: any) => response.data,
     }),
 
-    getActivities: build.query({
-      query: () => ({ url: `activities?filter[date]=` }),
+    getActivitiesByDate: build.query({
+      query: (date) => ({ url: `activities?filter[date]=${date}` }),
       transformResponse: (response: any) => response.data,
     }),
 
@@ -38,14 +38,29 @@ export const wegwijsApi = createApi({
       query: () => ({ url: `ideas` }),
       transformResponse: (response: any) => response.data,
     }),
+
+    getOrgBySearchVal: build.query({
+      query: (searchValue) => ({
+        url: `organizations?filter[search]=${searchValue}`,
+      }),
+      transformResponse: (response: any) => response.data,
+    }),
+
+    // GET NEWS
+    getNews: build.query({
+      query: () => ({ url: `news-articles` }),
+      transformResponse: (response: any) => response.data,
+    }),
   }),
 })
 
 export const {
+  useGetNewsQuery,
   useGetIdeasQuery,
-  useGetActivitiesQuery,
+  useGetActivitiesByDateQuery,
   useGetGeneralQuery,
   useGetCategoriesQuery,
   useGetOrganizationsQuery,
   useGetActivitiesByTargetGrpQuery,
+  useGetOrgBySearchValQuery,
 } = wegwijsApi
