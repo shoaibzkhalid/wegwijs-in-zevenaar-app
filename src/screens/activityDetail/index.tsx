@@ -12,8 +12,6 @@ export const ActivityDetail = () => {
   const { attributes, id } = activity
   const { name, start_date, end_date, description, image } = attributes
 
-  console.log('activity', activity)
-
   return (
     <Wrapper>
       <Heading>Activiteiten</Heading>
