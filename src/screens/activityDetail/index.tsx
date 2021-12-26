@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native'
 import dayjs from 'dayjs'
 import Wrapper from 'component/Wrapper'
 import RenderHTML from 'react-native-render-html'
-import { COLORS } from 'theme'
+import { COLORS, SIZES } from 'theme'
 import { Heading, NewsCard, TextMedium } from 'theme/common.styles'
 
 export const ActivityDetail = () => {
@@ -27,7 +27,7 @@ export const ActivityDetail = () => {
           style={{ width: 200, height: 200, alignSelf: 'center' }}
           resizeMode="contain"
         />
-        <RenderHTML source={{ html: description }} />
+        <RenderHTML source={{ html: description }} contentWidth={SIZES.width} />
       </NewsCard>
     </Wrapper>
   )

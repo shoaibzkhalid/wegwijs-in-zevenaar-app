@@ -17,10 +17,9 @@ export const SubjectList = () => {
   const { navigation } = useAppNavigation()
 
   const { selectedCategories, isLoading } = useCategories(id)
-  // console.log('data', selectedCategories)
 
   const renderContent = () => {
-    if (isLoading) return <Loader color="red" />
+    if (isLoading) return <Loader />
 
     return (
       <Fragment>

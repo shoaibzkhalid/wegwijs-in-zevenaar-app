@@ -24,11 +24,11 @@ export const useCategories = (selectedCategory) => {
 }
 
 export const useOrganizations = (categoryId) => {
-  const { data } = useGetOrganizationsQuery(categoryId)
+  const { data, isLoading } = useGetOrganizationsQuery(categoryId)
 
   const organizations = data ?? []
 
-  return { organizations } as any
+  return { organizations, isLoading } as any
 }
 
 export const useIdeas = () => {

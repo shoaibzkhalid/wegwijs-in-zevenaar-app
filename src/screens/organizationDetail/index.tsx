@@ -2,67 +2,67 @@ import { useRoute } from '@react-navigation/native'
 import Wrapper from 'component/Wrapper'
 import React from 'react'
 import styled from 'styled-components/native'
-import { IMAGES } from 'theme'
+import { IMAGES, SIZES } from 'theme'
 import { Heading, NewsCard, TouchRowContainer } from 'theme/common.styles'
 import { RenderHTML } from 'react-native-render-html'
+import { linkMap } from 'utils'
+import * as Linking from 'expo-linking'
 
 export const OrganizationDetail = () => {
   const organization = (useRoute().params as any).organization
+  const { attributes } = organization
+  const { name, phone_number, email, website } = attributes
+  const { description, information_title, information_description } = attributes
+  const { street, house_number, house_number_addition } = attributes
+  const { postal_code, city } = attributes
+  const { mapMarkerIcon, phoneIcon, envelopeIcon, globeIcon } = IMAGES
 
   return (
     <Wrapper>
-      {organization && <Heading>{organization.attributes.name}</Heading>}
+      {organization && <Heading>{name}</Heading>}
 
       <NewsCard>
-        {organization && <PostTitle>{organization.attributes.name}</PostTitle>}
-        {organization.attributes.street && (
-          <ContactRow>
-            <ImageIcon source={IMAGES.mapMarkerIcon} />
+        {organization && <PostTitle>{name}</PostTitle>}
+        {street && (
+          <ContactRow onPress={() => linkMap(attributes)}>
+            <ImageIcon source={mapMarkerIcon} />
             <ContactText>
-              {organization.attributes.street +
+              {street +
                 ' ' +
-                organization.attributes.house_number +
-                (organization.attributes.house_number_addition
-                  ? organization.attributes.house_number_addition
-                  : '') +
+                house_number +
+                (house_number_addition ? house_number_addition : '') +
                 ', ' +
-                (organization.attributes.postal_code
-                  ? organization.attributes.postal_code + ' '
-                  : '') +
-                (organization.attributes.city ? organization.attributes.city : '')}
+                (postal_code ? postal_code + ' ' : '') +
+                (city ? city : '')}
             </ContactText>
           </ContactRow>
         )}
 
-        {organization.attributes.phone_number && (
-          <ContactRow>
-            <ImageIcon source={IMAGES.phoneIcon} />
-            <ContactText>{organization.attributes.phone_number}</ContactText>
+        {phone_number && (
+          <ContactRow onPress={() => Linking.openURL(`tel:${phone_number}`)}>
+            <ImageIcon source={phoneIcon} />
+            <ContactText>{phone_number}</ContactText>
           </ContactRow>
         )}
 
-        {organization.attributes.email && (
-          <ContactRow>
-            <ImageIcon source={IMAGES.envelopeIcon} />
-            <ContactText style={{ paddingLeft: 10 }}>
-              {organization.attributes.email}
-            </ContactText>
+        {email && (
+          <ContactRow onPress={() => Linking.openURL(`mailto:${email}`)}>
+            <ImageIcon source={envelopeIcon} />
+            <ContactText style={{ paddingLeft: 10 }}>{email}</ContactText>
           </ContactRow>
         )}
 
-        {organization.attributes.website && (
-          <ContactRow>
-            <ImageIcon source={IMAGES.globeIcon} />
-            <ContactText>{organization.attributes.website}</ContactText>
+        {website && (
+          <ContactRow onPress={() => Linking.openURL(`https:${website}`)}>
+            <ImageIcon source={globeIcon} />
+            <ContactText>{website}</ContactText>
           </ContactRow>
         )}
 
-        {organization.attributes.description && (
-          <Heading>{organization.attributes.information_title}</Heading>
-        )}
+        {description && <Heading>{information_title}</Heading>}
 
-        {organization.attributes.information_description && (
-          <RenderHTML source={{ html: organization.attributes.information_description }} />
+        {information_description && (
+          <RenderHTML source={{ html: information_description }} contentWidth={SIZES.width} />
         )}
       </NewsCard>
     </Wrapper>

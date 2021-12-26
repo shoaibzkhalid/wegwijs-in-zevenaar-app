@@ -6,7 +6,7 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 export const Loader = ({
   style,
-  color,
+  color = 'red',
   size,
 }: {
   style?: any
@@ -17,7 +17,6 @@ export const Loader = ({
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    height: ${hp(80)}px;
   `
 
   return (

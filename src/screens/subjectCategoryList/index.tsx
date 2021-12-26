@@ -1,39 +1,40 @@
 import { useRoute } from '@react-navigation/native'
 import Wrapper from 'component/Wrapper'
 import React, { Fragment } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { COLORS } from 'theme'
-import { Heading, TextHuge, TextMedium } from 'theme/common.styles'
+import { Heading, TextMedium } from 'theme/common.styles'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
+  heightPercentageToDP,
 } from 'react-native-responsive-screen'
 import { useOrganizations } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 import { ScrollView } from 'react-native-gesture-handler'
+import { Loader } from 'component/Loader'
 
 export const SubjectCategoryList = () => {
   const { navigation } = useAppNavigation()
 
   const { category, subject } = useRoute().params as any
-  const { organizations } = useOrganizations(category.id)
+  const { organizations, isLoading } = useOrganizations(category.id)
+  const { name, short_description, children } = category
 
   return (
     <Wrapper>
       <ScrollView style={{ marginBottom: hp(15) }}>
         <Heading>
-          {category.name} - {subject.title}
+          {name} - {subject.title}
         </Heading>
-        {category.short_description && (
-          <TextMedium style={{ padding: 10, color: 'white' }}>
-            {category.short_description}
-          </TextMedium>
+        {short_description && (
+          <TextMedium style={{ padding: 10, color: 'white' }}>{short_description}</TextMedium>
         )}
 
         <Tags>
-          {category.children.length > 0 &&
-            category.children.map((tag, index) => (
+          {children.length > 0 &&
+            children.map((tag, index) => (
               <TouchableOpacity
                 key={index}
                 onPress={() =>
@@ -54,7 +55,7 @@ export const SubjectCategoryList = () => {
         <View>
           <Heading style={{ padding: 10, paddingBottom: 0 }}>Organisaties</Heading>
 
-          {organizations.length > 0 ? (
+          {!isLoading ? (
             <Fragment>
               {organizations.map((organization, index) => (
                 <TouchableOpacity
@@ -71,7 +72,9 @@ export const SubjectCategoryList = () => {
                 </TouchableOpacity>
               ))}
             </Fragment>
-          ) : null}
+          ) : (
+            <Loader />
+          )}
         </View>
       </ScrollView>
     </Wrapper>

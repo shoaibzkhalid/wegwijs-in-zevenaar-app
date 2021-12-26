@@ -17,6 +17,8 @@ export const Footer = () => {
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 
+  console.log('isLoading', isLoading, searchValue)
+
   React.useEffect(() => {
     inputRef?.current.focus()
   }, [])
@@ -38,7 +40,9 @@ export const Footer = () => {
         </TouchableOpacity>
       </SearchBar>
 
-      {!isLoading ? (
+      {isLoading && searchValue ? (
+        <Loader />
+      ) : (
         <Fragment>
           {organizations.map((organization) => {
             const { attributes, id } = organization
@@ -57,8 +61,6 @@ export const Footer = () => {
             )
           })}
         </Fragment>
-      ) : (
-        <Loader />
       )}
     </>
   )
