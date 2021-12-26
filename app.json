@@ -22,6 +22,12 @@
       ],
       "assetExts": ["ttf"]
     },
+
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "androidStatusBarColor": "#334393",
 
     "version": "2.0.25",
