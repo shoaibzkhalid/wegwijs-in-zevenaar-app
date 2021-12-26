@@ -1,12 +1,11 @@
 import { useRoute } from '@react-navigation/native'
 import Wrapper from 'component/Wrapper'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import React from 'react'
-import { Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { COLORS } from 'theme'
-import { BoldText, Heading, NewsCard, ParaText, TextMedium } from 'theme/common.styles'
+import { Heading, NewsCard, ParaText, TextMedium, TextNormal } from 'theme/common.styles'
 import { getSubString } from 'utils'
 import { useActivities } from 'utils/hooks'
 
@@ -32,28 +31,23 @@ export const ActivitiesList = () => {
 
         {activities.map((activity, index) => {
           const { attributes } = activity
-          const {
-            name,
-            start_date,
-            start_time,
-            end_time,
-            short_description,
-            street,
-            house_number,
-            city,
-          } = attributes
+          const { name, start_date, start_time, end_time } = attributes
+          const { short_description, street, house_number, city } = attributes
+
           return (
             <NewsCard key={index}>
-              <BoldText>{name}</BoldText>
-              <TextMedium style={{ color: COLORS.primary }}>
+              <TextMedium style={{ paddingBottom: 5 }}>{name}</TextMedium>
+              <TextMedium style={{ color: COLORS.lightPrimary }}>
                 Op {dayjs(start_date).format('DD-MM-YYYY')} van{' '}
                 {dayjs(start_time).format('HH:mm')} tot {dayjs(end_time).format('HH:mm')}
               </TextMedium>
-              <TextMedium>{getSubString(short_description)}</TextMedium>
-
-              <TextMedium>
+              <TextMedium style={{ color: COLORS.lightPrimary }}>
                 Adres: {street} {house_number} {city}
               </TextMedium>
+
+              <TextNormal style={{ fontFamily: 'Roboto_400Regular', paddingTop: 10 }}>
+                {getSubString(short_description)}
+              </TextNormal>
             </NewsCard>
           )
         })}

@@ -1,3 +1,4 @@
+import { useRoute } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { View, Text } from 'react-native'
@@ -10,6 +11,9 @@ import { CustomIcon } from './CustomIcon'
 
 export const Header = () => {
   const { navigation } = useAppNavigation()
+  const route = useRoute()
+
+  console.log('navigation', navigation, route.name)
 
   return (
     <SafeAreaView>

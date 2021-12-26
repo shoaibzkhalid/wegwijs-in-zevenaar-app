@@ -1,23 +1,19 @@
 import { useRoute } from '@react-navigation/native'
 import Wrapper from 'component/Wrapper'
 import React, { Fragment } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import styled from 'styled-components/native'
-import { COLORS } from 'theme'
-import { Heading, TextHuge, TextMedium } from 'theme/common.styles'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen'
+import { View, TouchableOpacity } from 'react-native'
+import { Heading, NewsCard, TextMedium } from 'theme/common.styles'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { useOrganizations } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 import { ScrollView } from 'react-native'
+import { Loader } from 'component/Loader'
 
 export const SubjectCategoryTagList = () => {
   const { navigation } = useAppNavigation()
 
   const { category, subject, tag } = useRoute().params as any
-  const { organizations } = useOrganizations(category.id)
+  const { organizations, isLoading } = useOrganizations(category.id)
 
   return (
     <Wrapper>
@@ -26,7 +22,7 @@ export const SubjectCategoryTagList = () => {
           {subject.title} - {category.name} - {tag.name}
         </Heading>
         <View>
-          {organizations.length > 0 ? (
+          {!isLoading ? (
             <Fragment>
               {organizations.map((organization, index) => (
                 <TouchableOpacity
@@ -43,33 +39,11 @@ export const SubjectCategoryTagList = () => {
                 </TouchableOpacity>
               ))}
             </Fragment>
-          ) : null}
+          ) : (
+            <Loader />
+          )}
         </View>
       </ScrollView>
     </Wrapper>
   )
 }
-
-const Tags = styled.View`
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-`
-
-const TagCard = styled.View`
-  background-color: ${COLORS.white};
-  padding: 10px 10px;
-  width: ${wp(45)}px;
-  height: ${hp(7)}px;
-  margin: 5px;
-`
-
-const NewsCard = styled.View`
-  border-radius: 15px;
-  overflow: hidden;
-  margin-bottom: 10px;
-  background-color: white;
-  padding: 10px;
-  margin: 10px;
-`

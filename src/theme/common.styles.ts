@@ -401,11 +401,6 @@ export const SubHeading = styled(TextMedium)`
   color: ${COLORS.white};
 `
 
-export const BoldText = styled(TextMedium)`
-  font-weight: bold;
-  color: ${COLORS.primary};
-`
-
 export const ParaText = styled(TextMedium)`
   padding: 10px;
   padding-top: 0px;

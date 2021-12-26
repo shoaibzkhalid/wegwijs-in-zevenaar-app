@@ -1,6 +1,6 @@
 import Wrapper from 'component/Wrapper'
 import React from 'react'
-import { BoldText, Heading, NewsCard, ParaText, TextNormal } from 'theme/common.styles'
+import { Heading, NewsCard, ParaText, TextMedium, TextNormal } from 'theme/common.styles'
 import { useIdeas } from 'utils/hooks'
 
 export const IdeasList = () => {
@@ -25,7 +25,7 @@ export const IdeasList = () => {
       </ParaText>
 
       <NewsCard>
-        <BoldText>Heeft u zelf een leuk idee?</BoldText>
+        <TextMedium>Heeft u zelf een leuk idee?</TextMedium>
         <TextNormal color={'#494c23'}>
           Ga naar de website www.wegwijsinzevenaar.nl en dien je idee in.
         </TextNormal>

@@ -17,8 +17,6 @@ export const Footer = () => {
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 
-  console.log('isLoading', isLoading, searchValue)
-
   React.useEffect(() => {
     inputRef?.current.focus()
   }, [])
@@ -33,6 +31,7 @@ export const Footer = () => {
             setSearchClicked(false)
             setSearchValue(e.nativeEvent.text)
           }}
+          autoCapitalize="none"
         />
 
         <TouchableOpacity onPress={() => setSearchClicked(true)}>

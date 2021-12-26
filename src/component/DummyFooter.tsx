@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import { TouchableOpacity } from 'react-native'
+import React from 'react'
+import { TouchableOpacity, SafeAreaView } from 'react-native'
 import { heightPercentageToDP } from 'react-native-responsive-screen'
 import styled from 'styled-components/native'
 import { COLORS, IMAGES } from 'theme'
@@ -10,7 +10,7 @@ export const DummyFooter = () => {
   const { navigation } = useAppNavigation()
 
   return (
-    <>
+    <SafeAreaView>
       <SearchBar onPress={() => navigation.navigate('OrganizationsList')}>
         <SearchBarInputView>
           <TextMedium color={COLORS.secondary}>Zoeken op onderwerp & organisaties</TextMedium>
@@ -20,7 +20,7 @@ export const DummyFooter = () => {
           <SearchIcon source={IMAGES.searchIcon} />
         </TouchableOpacity>
       </SearchBar>
-    </>
+    </SafeAreaView>
   )
 }
 
