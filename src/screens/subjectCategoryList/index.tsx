@@ -4,11 +4,10 @@ import React, { Fragment } from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { COLORS } from 'theme'
-import { Heading, TextMedium } from 'theme/common.styles'
+import { Heading, SubHeading, TextMedium, TextNormal } from 'theme/common.styles'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-  heightPercentageToDP,
 } from 'react-native-responsive-screen'
 import { useOrganizations } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
@@ -28,9 +27,7 @@ export const SubjectCategoryList = () => {
         <Heading>
           {name} - {subject.title}
         </Heading>
-        {short_description && (
-          <TextMedium style={{ padding: 10, color: 'white' }}>{short_description}</TextMedium>
-        )}
+        {short_description && <SubHeading>{short_description}</SubHeading>}
 
         <Tags>
           {children.length > 0 &&
@@ -46,7 +43,7 @@ export const SubjectCategoryList = () => {
                 }
               >
                 <TagCard>
-                  <TextMedium>{tag.name}</TextMedium>
+                  <TextNormal numberOfLines={2}>{tag.name}</TextNormal>
                 </TagCard>
               </TouchableOpacity>
             ))}
@@ -92,7 +89,6 @@ const TagCard = styled.View`
   background-color: ${COLORS.white};
   padding: 10px 10px;
   width: ${wp(45)}px;
-  height: ${hp(7)}px;
   margin: 5px;
 `
 

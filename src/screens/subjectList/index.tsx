@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Headline, Subheading } from 'react-native-paper'
 import styled from 'styled-components/native'
 import { COLORS } from 'theme'
-import { Heading } from 'theme/common.styles'
+import { Heading, TextMedium } from 'theme/common.styles'
 import { useCategories } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 
@@ -23,6 +23,8 @@ export const SubjectList = () => {
 
     return (
       <Fragment>
+        <MediumText>{description}</MediumText>
+
         {selectedCategories &&
         selectedCategories.attributes &&
         selectedCategories.attributes.children
@@ -42,7 +44,6 @@ export const SubjectList = () => {
               </TouchableOpacity>
             ))
           : null}
-        <MediumText>{description}</MediumText>
       </Fragment>
     )
   }
@@ -75,7 +76,7 @@ const HugeText = styled(Headline)`
   color: white;
 `
 
-const MediumText = styled(Subheading)`
+const MediumText = styled(TextMedium)`
   padding: 0px 5px;
   color: white;
 `

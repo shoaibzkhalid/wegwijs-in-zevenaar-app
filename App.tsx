@@ -2,7 +2,6 @@ import React from 'react'
 import 'react-native-gesture-handler'
 import { store } from 'store'
 import Routes from 'navigation/routes'
-import { DarkThemeProvider } from 'DarkThemeProvider'
 import { Text } from 'react-native'
 import { Provider as PaperProvider } from 'react-native-paper'
 import { Provider } from 'react-redux'
@@ -18,9 +17,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PaperProvider>
-        <DarkThemeProvider>
-          <Routes />
-        </DarkThemeProvider>
+        <Routes />
       </PaperProvider>
     </Provider>
   )

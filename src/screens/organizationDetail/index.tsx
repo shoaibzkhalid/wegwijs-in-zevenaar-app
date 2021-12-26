@@ -3,7 +3,7 @@ import Wrapper from 'component/Wrapper'
 import React from 'react'
 import styled from 'styled-components/native'
 import { IMAGES, SIZES } from 'theme'
-import { Heading, NewsCard, TouchRowContainer } from 'theme/common.styles'
+import { Heading, NewsCard, TextNormal, TouchRowContainer } from 'theme/common.styles'
 import { RenderHTML } from 'react-native-render-html'
 import { linkMap } from 'utils'
 import * as Linking from 'expo-linking'
@@ -73,6 +73,7 @@ const PostTitle = styled.Text`
   color: #494c23;
   font-weight: bold;
   font-size: 18px;
+  margin-bottom: 5px;
 `
 
 const ImageIcon = styled.Image`
@@ -84,6 +85,9 @@ const ContactRow = styled(TouchRowContainer)`
   padding: 5px 10px;
 `
 
-const ContactText = styled.Text`
+const ContactText = styled(TextNormal)`
   padding-left: 10px;
+  color: black;
+  font-size: 16px;
+  font-family: Roboto_400Regular;
 `

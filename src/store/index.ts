@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
-import settings from 'store/settingsSlice'
 import { wegwijsApi } from './api'
 
 const rootReducer = combineReducers({
-  settings,
   [wegwijsApi.reducerPath]: wegwijsApi.reducer,
 })
 

@@ -16,7 +16,6 @@ export const ActivityCalendar = () => {
 
   const [selectedDate, setSelectedDate] = React.useState('')
   const { activities } = useActivitiesByDate(selectedDate)
-  console.log('selectedDate', selectedDate, activities)
 
   const getMarkedDates = (date) => {
     return { [date]: { selected: true, selectedColor: 'blue' } }
@@ -41,7 +40,7 @@ export const ActivityCalendar = () => {
           </NewsCard>
         ) : (
           <NewsCard>
-            <Text>Selecteer een datum</Text>
+            <TextMedium>Selecteer een datum</TextMedium>
           </NewsCard>
         )}
 
@@ -61,11 +60,11 @@ export const ActivityCalendar = () => {
                 >
                   <TextMedium>{name}</TextMedium>
 
-                  <TextMedium style={{ color: COLORS.primary }}>
+                  <TextMedium color={COLORS.lightPrimary}>
                     Vant {dayjs(start_date).format('DD-MM-YYYY')} tot{' '}
                     {dayjs(end_date).format('DD-MM-YYYY')}
                   </TextMedium>
-                  <TextMedium>{short_description}</TextMedium>
+                  <TextMedium color={'#494c23'}>{short_description}</TextMedium>
                 </TouchCard>
               )
             })}

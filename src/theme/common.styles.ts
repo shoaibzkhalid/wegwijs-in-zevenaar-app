@@ -35,10 +35,8 @@ export const CenterRowContainer = styled.View`
 `
 
 export const shadow = css`
-  /* border-width: 0.4px; */
   border-color: ${COLORS.shadowColor};
   border-bottom-width: 0;
-  box-shadow: ${({ theme }) => `10px 5px 5px ${theme.shadowColor}`};
   shadow-opacity: 1;
   elevation: 1;
 `
@@ -134,9 +132,11 @@ type CustomTextProps = {
 }
 
 export const CustomText = styled.Text<CustomTextProps>`
-  color: ${({ theme, color }) => (color ? color : theme.navColor)};
-  color: ${({ color = 'black', primary }) => (primary ? COLORS.primary : `${color}`)};
+  color: ${({ theme, color }) => (color ? color : COLORS.black)};
+  color: ${({ color = '#494c23', primary }) => (primary ? COLORS.primary : `${color}`)};
   font-weight: ${({ weight }) => `${weight ? weight : 'normal'}`};
+
+  font-family: Roboto_500Medium;
 `
 export const TextTiny = styled(CustomText)`
   font-size: ${FONTS.base}px;
@@ -392,11 +392,18 @@ export const TouchCard = styled.TouchableOpacity`
 export const Heading = styled(Headline)`
   color: ${COLORS.white};
   padding: 10px 7px;
-  padding-bottom: 5px;
+  padding-bottom: 0px;
   font-weight: bold;
 `
+export const SubHeading = styled(TextMedium)`
+  padding: 10px;
+  padding-top: 0;
+  color: ${COLORS.white};
+`
+
 export const BoldText = styled(TextMedium)`
   font-weight: bold;
+  color: ${COLORS.primary};
 `
 
 export const ParaText = styled(TextMedium)`
