@@ -11,6 +11,7 @@ import {
   useGetOrganizationsQuery,
   useGetOrgBySearchValQuery,
 } from 'store/api'
+import { setDrawer } from 'store/generalSlice'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -113,4 +114,17 @@ export const useOrganizationsBySearchVal = (searchValue) => {
   const { data, isLoading } = useGetOrgBySearchValQuery(searchValue)
   const organizations = data ?? []
   return { organizations, isLoading } as any
+}
+
+export const useDrawer = () => {
+  const dispatch = useAppDispatch()
+  const drawerStatus = useAppSelector((state) => state.general.drawerStatus)
+  const toggleDrawer = () => dispatch(setDrawer(!drawerStatus))
+  const closeDrawer = () => dispatch(setDrawer(false))
+
+  return {
+    drawerStatus,
+    toggleDrawer,
+    closeDrawer,
+  }
 }

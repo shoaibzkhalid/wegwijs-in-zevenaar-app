@@ -1,23 +1,27 @@
+import { useRoute } from '@react-navigation/native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 import { IMAGES } from 'theme'
 import { TouchRowContainer } from 'theme/common.styles'
+import { useDrawer } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 import { CustomIcon } from './CustomIcon'
 
 export const Header = () => {
-  const { navigation } = useAppNavigation()
+  const { drawerNav } = useAppNavigation()
+  const { toggleDrawer } = useDrawer()
+  const route = useRoute()
 
   return (
     <SafeAreaView>
       <HeaderView>
-        <HeaderLeft>
+        <HeaderLeft onPress={() => toggleDrawer()}>
           <CustomIcon name="menu" size={40} />
         </HeaderLeft>
 
-        {navigation.canGoBack() && (
-          <TouchRowContainer onPress={() => navigation.goBack()}>
+        {route.name !== 'Home' && (
+          <TouchRowContainer onPress={() => drawerNav.goBack()}>
             <CustomIcon name="arrow-back" size={40} />
             <BackText>Vorig</BackText>
           </TouchRowContainer>
@@ -37,8 +41,7 @@ const HeaderView = styled.View`
   align-items: center;
 `
 
-const HeaderLeft = styled.View`
-  display: flex;
+const HeaderLeft = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
 `

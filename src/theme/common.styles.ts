@@ -334,7 +334,7 @@ export const DrawerContainer = styled.View`
   background-color: ${COLORS.white};
   height: 100%;
   justify-content: space-around;
-  padding-top: 30px;
+  /* padding-top: 30px; */
 `
 
 export const ListItem = styled.TouchableOpacity`

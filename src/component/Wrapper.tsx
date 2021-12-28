@@ -5,6 +5,7 @@ import { Header } from './Header'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { useRoute } from '@react-navigation/native'
 import { DummyFooter } from './DummyFooter'
+import { DrawerWrapper } from 'navigation/DrawerWrapper'
 
 type Props = {
   children: ReactElement | ReactElement[]
@@ -14,11 +15,13 @@ const Wrapper: React.FC<Props> = ({ children }) => {
   const isHome = useRoute().name === 'Home'
 
   return (
-    <SafeAreaView>
-      <Header />
-      <ScrollView contentContainerStyle={{ paddingBottom: hp(30) }}>{children}</ScrollView>
-      {isHome && <DummyFooter />}
-    </SafeAreaView>
+    <DrawerWrapper>
+      <SafeAreaView>
+        <Header />
+        <ScrollView contentContainerStyle={{ paddingBottom: hp(30) }}>{children}</ScrollView>
+        {isHome && <DummyFooter />}
+      </SafeAreaView>
+    </DrawerWrapper>
   )
 }
 

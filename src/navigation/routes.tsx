@@ -28,6 +28,7 @@ import { useExpoFonts } from 'utils/hooks/useExpoFonts'
 
 const Routes = () => {
   const Stack = createStackNavigator<RootStackParamList>()
+
   const [fontsLoaded] = useExpoFonts()
   const { appTheme } = useSettings()
 
@@ -42,14 +43,11 @@ const Routes = () => {
         <Stack.Screen name="SubjectCategoryList" component={SubjectCategoryList} />
         <Stack.Screen name="OrganizationDetail" component={OrganizationDetail} />
         <Stack.Screen name="OrganizationsList" component={OrganizationsList} />
-
         <Stack.Screen name="ActivityOrIdea" component={ActivityOrIdea} />
         <Stack.Screen name="IdeasList" component={IdeasList} />
-
         <Stack.Screen name="ActivityChoose" component={ActivityChoose} />
         <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
         <Stack.Screen name="IdeaDetail" component={IdeaDetail} />
-
         <Stack.Screen name="Contact" component={Contact} />
         <Stack.Screen name="SubjectCategoryTagList" component={SubjectCategoryTagList} />
         <Stack.Screen name="ActivityCalendar" component={ActivityCalendar} />
