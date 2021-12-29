@@ -6,6 +6,7 @@ import {
   useGetActivitiesByDateQuery,
   useGetActivitiesByTargetGrpQuery,
   useGetCategoriesQuery,
+  useGetGeneralQuery,
   useGetIdeasQuery,
   useGetNewsQuery,
   useGetOrganizationsQuery,
@@ -18,8 +19,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useCategories = (selectedCategory) => {
   const { data, isLoading } = useGetCategoriesQuery({})
-
-  const selectedCategories = data?.filter((category) => category.id == selectedCategory)[0]
+  const selectedCategories = data?.filter((category) => category.id === selectedCategory)[0]
 
   return { selectedCategories, isLoading }
 }
@@ -127,4 +127,9 @@ export const useDrawer = () => {
     toggleDrawer,
     closeDrawer,
   }
+}
+
+export const useGeneral = () => {
+  const { data } = useGetGeneralQuery({})
+  return { data }
 }

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { DrawerContainer, TouchRowContainer } from 'theme/common.styles'
+import * as Linking from 'expo-linking'
 
 import { Image, ScrollView, Text } from 'react-native'
 import { Header } from 'component/Header'
@@ -19,6 +20,10 @@ export const DrawerContent = () => {
           <TouchRowContainer
             onPress={() => {
               closeDrawer()
+              if (opt.id === 10) {
+                Linking.openURL('https://www.vrijwilligerswerk.nl/privacyverklaring')
+                return
+              }
               navigation.navigate(opt.screenName as any, { subject: opt.subject })
             }}
             key={opt.title}

@@ -25,6 +25,7 @@ import {
   OrganizationDetail,
 } from 'screens'
 import { useExpoFonts } from 'utils/hooks/useExpoFonts'
+import { Welcome } from 'screens/welcome'
 
 const Routes = () => {
   const Stack = createStackNavigator<RootStackParamList>()
@@ -38,6 +39,7 @@ const Routes = () => {
     <NavigationContainer theme={appTheme ? darkTheme : lightTheme}>
       <Stack.Navigator screenOptions={stackOptions}>
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="NewsList" component={NewsList} />
         <Stack.Screen name="SubjectList" component={SubjectList} />
         <Stack.Screen name="SubjectCategoryList" component={SubjectCategoryList} />

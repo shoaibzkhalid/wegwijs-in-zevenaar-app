@@ -1,7 +1,6 @@
 import { HomeOption } from 'models/generalTypes'
 import { IMAGES } from 'theme'
 import * as Linking from 'expo-linking'
-import { Home, NewsList } from 'screens'
 
 export const API_URL =
   'https://wegwijs-in-zevenaar-platform-dev-pw24i.ondigitalocean.app/api/v1/'
@@ -197,7 +196,7 @@ export const drawerOpts = [
     title: 'Welkom',
     icon: IMAGES.home,
     activeIcon: IMAGES.home,
-    screenName: 'Home',
+    screenName: 'Welcome',
   },
   {
     id: 1,
@@ -312,7 +311,7 @@ export const drawerOpts = [
     title: 'Privacyverklaring',
     icon: IMAGES.icon10,
     activeIcon: IMAGES.icon10,
-    screenName: Linking.openURL('https://www.vrijwilligerswerk.nl/privacyverklaring'),
+    screenName: '',
   },
   {
     id: 13,

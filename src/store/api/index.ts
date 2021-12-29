@@ -11,11 +11,6 @@ export const wegwijsApi = createApi({
       transformResponse: (response: any) => response.data,
     }),
 
-    // GET GENERAL
-    getGeneral: build.query({
-      query: () => ({ url: `general` }),
-    }),
-
     // GET ACTIVITIES BY TARGET GROUP
     getActivitiesByTargetGrp: build.query({
       query: (group) => ({ url: `activities?filter[target_group]=${group ?? ''}` }),
@@ -44,6 +39,11 @@ export const wegwijsApi = createApi({
         url: `organizations?filter[search]=${searchValue}`,
       }),
       transformResponse: (response: any) => response.data,
+    }),
+
+    // GET GENERAL
+    getGeneral: build.query({
+      query: () => ({ url: `general` }),
     }),
 
     // GET NEWS
