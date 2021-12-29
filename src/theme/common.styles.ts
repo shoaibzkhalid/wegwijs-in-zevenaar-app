@@ -406,3 +406,18 @@ export const ParaText = styled(TextMedium)`
   padding-top: 0px;
   color: white;
 `
+export const ContactIcon = styled.Image`
+  width: 20px;
+  height: 20px;
+`
+
+export const ContactRow = styled(TouchRowContainer)`
+  padding: 5px 10px;
+`
+
+export const ContactText = styled(TextNormal)`
+  padding-left: 10px;
+  color: black;
+  font-size: 16px;
+  font-family: Roboto_400Regular;
+`

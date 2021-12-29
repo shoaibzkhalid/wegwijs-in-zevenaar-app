@@ -3,7 +3,7 @@ import Wrapper from 'component/Wrapper'
 import React from 'react'
 import styled from 'styled-components/native'
 import { IMAGES, SIZES } from 'theme'
-import { Heading, NewsCard, TextNormal, TouchRowContainer } from 'theme/common.styles'
+import { ContactIcon, ContactRow, ContactText, Heading, NewsCard } from 'theme/common.styles'
 import { RenderHTML } from 'react-native-render-html'
 import { linkMap } from 'utils'
 import * as Linking from 'expo-linking'
@@ -25,7 +25,7 @@ export const OrganizationDetail = () => {
         {organization && <PostTitle>{name}</PostTitle>}
         {street && (
           <ContactRow onPress={() => linkMap(attributes)}>
-            <ImageIcon source={mapMarkerIcon} />
+            <ContactIcon source={mapMarkerIcon} />
             <ContactText>
               {street +
                 ' ' +
@@ -40,21 +40,21 @@ export const OrganizationDetail = () => {
 
         {phone_number && (
           <ContactRow onPress={() => Linking.openURL(`tel:${phone_number}`)}>
-            <ImageIcon source={phoneIcon} />
+            <ContactIcon source={phoneIcon} />
             <ContactText>{phone_number}</ContactText>
           </ContactRow>
         )}
 
         {email && (
           <ContactRow onPress={() => Linking.openURL(`mailto:${email}`)}>
-            <ImageIcon source={envelopeIcon} />
+            <ContactIcon source={envelopeIcon} />
             <ContactText style={{ paddingLeft: 10 }}>{email}</ContactText>
           </ContactRow>
         )}
 
         {website && (
           <ContactRow onPress={() => Linking.openURL(`https:${website}`)}>
-            <ImageIcon source={globeIcon} />
+            <ContactIcon source={globeIcon} />
             <ContactText>{website}</ContactText>
           </ContactRow>
         )}
@@ -74,20 +74,4 @@ const PostTitle = styled.Text`
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 5px;
-`
-
-const ImageIcon = styled.Image`
-  width: 20px;
-  height: 20px;
-`
-
-const ContactRow = styled(TouchRowContainer)`
-  padding: 5px 10px;
-`
-
-const ContactText = styled(TextNormal)`
-  padding-left: 10px;
-  color: black;
-  font-size: 16px;
-  font-family: Roboto_400Regular;
 `

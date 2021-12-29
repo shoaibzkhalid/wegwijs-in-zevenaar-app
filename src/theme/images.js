@@ -30,8 +30,10 @@ import envelopeIcon from '../../assets/envelope-solid.png'
 import phoneIcon from '../../assets/phone-alt-solid.png'
 import globeIcon from '../../assets/globe-europe-solid.png'
 import home from '../../assets/home.png'
+import userIcon from '../../assets/user-solid.png'
 
 export const IMAGES = {
+  userIcon,
   home,
   icon10,
   mapMarkerIcon,

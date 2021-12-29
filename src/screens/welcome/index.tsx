@@ -9,20 +9,23 @@ import { useGeneral } from 'utils/hooks'
 
 export const Welcome = () => {
   const video = React.useRef(null)
-  const { data } = useGeneral()
+  const { generalData, isLoading } = useGeneral()
 
   return (
     <Wrapper>
       <Heading>Welkom</Heading>
       <SubHeading>In de Wegwijs in Zevenaar app</SubHeading>
 
-      {data ? (
+      {!isLoading ? (
         <NewsCard>
-          <RenderHTML source={{ html: data.welcome_message }} contentWidth={SIZES.width} />
+          <RenderHTML
+            source={{ html: generalData.welcome_message }}
+            contentWidth={SIZES.width}
+          />
 
           <Video
             source={{
-              uri: data.welcome_video,
+              uri: generalData.welcome_video,
             }}
             style={{ width: 320, height: 200 }}
             resizeMode="contain"

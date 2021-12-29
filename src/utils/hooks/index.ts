@@ -130,6 +130,8 @@ export const useDrawer = () => {
 }
 
 export const useGeneral = () => {
-  const { data } = useGetGeneralQuery({})
-  return { data }
+  const { data, isLoading } = useGetGeneralQuery({})
+
+  const generalData = data ?? {}
+  return { generalData, isLoading }
 }
