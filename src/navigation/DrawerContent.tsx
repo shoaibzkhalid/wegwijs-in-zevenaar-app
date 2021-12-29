@@ -15,7 +15,7 @@ export const DrawerContent = () => {
   return (
     <DrawerContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header />
+        <Header noBack />
         {drawerOpts.map((opt) => (
           <TouchRowContainer
             onPress={() => {
