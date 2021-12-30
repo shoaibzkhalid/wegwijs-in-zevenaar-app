@@ -28,7 +28,6 @@ export const DrawerWrapper: React.FC<Props> = ({ children }) => {
       drawerType="front"
       renderNavigationView={() => <DrawerContent />}
       drawerWidth={SIZES.width - 100}
-      edgeWidth={0}
       drawerPosition={'left'}
     >
       {children}
