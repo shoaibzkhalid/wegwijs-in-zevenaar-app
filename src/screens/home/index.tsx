@@ -4,7 +4,6 @@ import { HomeOption } from 'models/generalTypes'
 import { homeOptions } from 'utils/hooks/constants'
 import { ItemGrid } from 'theme/common.styles'
 import Wrapper from 'component/Wrapper'
-import { DrawerWrapper } from 'navigation/DrawerWrapper'
 
 export const Home = () => {
   return (

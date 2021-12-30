@@ -121,11 +121,13 @@ export const useDrawer = () => {
   const drawerStatus = useAppSelector((state) => state.general.drawerStatus)
   const toggleDrawer = () => dispatch(setDrawer(!drawerStatus))
   const closeDrawer = () => dispatch(setDrawer(false))
+  const openDrawer = () => dispatch(setDrawer(true))
 
   return {
     drawerStatus,
     toggleDrawer,
     closeDrawer,
+    openDrawer,
   }
 }
 

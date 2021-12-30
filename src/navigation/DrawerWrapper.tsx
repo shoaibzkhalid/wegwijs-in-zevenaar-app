@@ -10,7 +10,7 @@ export type Props = {
 
 export const DrawerWrapper: React.FC<Props> = ({ children }) => {
   let drawer
-  const { drawerStatus, closeDrawer } = useDrawer()
+  const { drawerStatus } = useDrawer()
 
   React.useEffect(() => {
     if (drawerStatus) {
@@ -25,7 +25,6 @@ export const DrawerWrapper: React.FC<Props> = ({ children }) => {
       ref={(d) => {
         drawer = d
       }}
-      onDrawerClose={() => closeDrawer()}
       drawerType="front"
       renderNavigationView={() => <DrawerContent />}
       drawerWidth={SIZES.width - 100}

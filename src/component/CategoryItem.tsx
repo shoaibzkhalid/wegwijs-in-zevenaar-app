@@ -5,6 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen'
 import styled from 'styled-components/native'
+import { useDrawer } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 
 type Props = {
@@ -14,9 +15,15 @@ type Props = {
 export const CategoryItem: React.FC<Props> = ({ data }) => {
   const { icon, title, subject, screenName, target } = data
   const { navigation } = useAppNavigation()
+  const { closeDrawer } = useDrawer()
 
   return (
-    <Item onPress={() => navigation.navigate(screenName, { subject, target })}>
+    <Item
+      onPress={() => {
+        closeDrawer()
+        navigation.navigate(screenName, { subject, target })
+      }}
+    >
       <ItemIcon source={icon} />
       <ItemText>{title}</ItemText>
     </Item>
