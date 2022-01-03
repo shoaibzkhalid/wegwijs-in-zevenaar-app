@@ -63,7 +63,7 @@ export const SectionView = styled.View`
 
 export const CenterAlignText = styled.Text`
   text-align: center;
-  color: ${COLORS.secondary};
+  color: ${COLORS.lightGray};
   font-size: ${FONTS.fontBig}px;
 `
 

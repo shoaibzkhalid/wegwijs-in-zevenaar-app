@@ -1,12 +1,14 @@
+import { CustomList } from 'component/CustomList'
 import Wrapper from 'component/Wrapper'
 import dayjs from 'dayjs'
-import React, { Fragment } from 'react'
+import React from 'react'
+import { useGetNewsQuery } from 'store/api'
 import { COLORS } from 'theme'
-import { Heading, NewsCard, ParaText, TextMedium, TextNormal } from 'theme/common.styles'
-import { useNews } from 'utils/hooks'
+import { Heading, NewsCard, TextMedium, TextNormal } from 'theme/common.styles'
+import { useData } from 'utils/hooks'
 
 export const NewsList = () => {
-  const { news } = useNews()
+  const { items, isLoading, isFetching, lp } = useData(useGetNewsQuery)
 
   const patchedNews = {
     id: '1',
@@ -15,14 +17,18 @@ export const NewsList = () => {
     post: [],
   }
 
-  patchedNews.post.push(news)
+  patchedNews.post.push(items)
 
   return (
     <Wrapper>
-      <Heading>{patchedNews.title}</Heading>
-      <Fragment>
-        {news.map((activity) => {
-          const { attributes, id } = activity
+      <CustomList
+        data={items}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        lastPage={lp}
+        ListHeaderComponent={() => <Heading>{patchedNews.title}</Heading>}
+        renderItem={({ item }) => {
+          const { attributes, id } = item
           const { name, start_date, end_date, short_description } = attributes
           return (
             <NewsCard key={id}>
@@ -35,8 +41,8 @@ export const NewsList = () => {
               <TextMedium>{short_description}</TextMedium>
             </NewsCard>
           )
-        })}
-      </Fragment>
+        }}
+      />
 
       {/* <ParaText>
         U vindt hier ideeën van de gemeenschap om samen het wonen en leven in de gemeente nog

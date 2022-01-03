@@ -1,79 +1,72 @@
 import { useRoute } from '@react-navigation/native'
 import Wrapper from 'component/Wrapper'
 import React, { Fragment } from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { COLORS } from 'theme'
 import { Heading, SubHeading, TextMedium, TextNormal } from 'theme/common.styles'
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen'
-import { useOrganizations } from 'utils/hooks'
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
+import { useData } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
-import { ScrollView } from 'react-native-gesture-handler'
-import { Loader } from 'component/Loader'
+import { useGetOrganizationsQuery } from 'store/api'
+import { CustomList } from 'component/CustomList'
 
 export const SubjectCategoryList = () => {
   const { navigation } = useAppNavigation()
-
   const { category, subject } = useRoute().params as any
-  const { organizations, isLoading } = useOrganizations(category.id)
+  const { items, isLoading, lp, isFetching } = useData(useGetOrganizationsQuery, category.id)
   const { name, short_description, children } = category
 
   return (
     <Wrapper>
-      <ScrollView style={{ marginBottom: hp(15) }}>
-        <Heading>
-          {name} - {subject.title}
-        </Heading>
-        {short_description && <SubHeading>{short_description}</SubHeading>}
+      <CustomList
+        data={items}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        lastPage={lp}
+        ListHeaderComponent={() => (
+          <Fragment>
+            <Heading>
+              {name} - {subject.title}
+            </Heading>
+            {short_description && <SubHeading>{short_description}</SubHeading>}
 
-        <Tags>
-          {children.length > 0 &&
-            children.map((tag, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() =>
-                  navigation.navigate('SubjectCategoryTagList', {
-                    tag,
-                    subject,
-                    category,
-                  })
-                }
-              >
-                <TagCard>
-                  <TextNormal numberOfLines={2}>{tag.name}</TextNormal>
-                </TagCard>
-              </TouchableOpacity>
-            ))}
-        </Tags>
-
-        <View>
-          <Heading style={{ padding: 10, paddingBottom: 0 }}>Organisaties</Heading>
-
-          {!isLoading ? (
-            <Fragment>
-              {organizations.map((organization, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() =>
-                    navigation.navigate('OrganizationDetail', {
-                      organization,
-                    })
-                  }
-                >
-                  <NewsCard>
-                    <TextMedium>{organization.attributes.name}</TextMedium>
-                  </NewsCard>
-                </TouchableOpacity>
-              ))}
-            </Fragment>
-          ) : (
-            <Loader />
-          )}
-        </View>
-      </ScrollView>
+            <Tags>
+              {children.length > 0 &&
+                children.map((tag, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() =>
+                      navigation.navigate('SubjectCategoryTagList', {
+                        tag,
+                        subject,
+                        category,
+                      })
+                    }
+                  >
+                    <TagCard>
+                      <TextNormal numberOfLines={2}>{tag.name}</TextNormal>
+                    </TagCard>
+                  </TouchableOpacity>
+                ))}
+            </Tags>
+            <Heading style={{ padding: 10, paddingBottom: 0 }}>Organisaties</Heading>
+          </Fragment>
+        )}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('OrganizationDetail', {
+                organization: item,
+              })
+            }
+          >
+            <NewsCard>
+              <TextMedium>{item.attributes.name}</TextMedium>
+            </NewsCard>
+          </TouchableOpacity>
+        )}
+      />
     </Wrapper>
   )
 }

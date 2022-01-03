@@ -4,14 +4,22 @@ import dayjs from 'dayjs'
 import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { useGetActivitiesByTargetGrpQuery } from 'store/api'
 import { COLORS } from 'theme'
 import { Heading, NewsCard, ParaText, TextMedium, TextNormal } from 'theme/common.styles'
 import { getSubString } from 'utils'
-import { useActivities } from 'utils/hooks'
+import { useData } from 'utils/hooks'
 
 export const ActivitiesList = () => {
   const { target } = useRoute().params as any
-  const { activities } = useActivities(target.targetGroup)
+  const [page, setPage] = React.useState(1)
+
+  const params = {
+    group: target.targetGroup,
+    page,
+  }
+
+  const { activities } = useData(useGetActivitiesByTargetGrpQuery, params)
 
   const patchedActivities = {
     item: {

@@ -1,18 +1,9 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { LocaleConfig } from 'react-native-calendars'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'store'
-import {
-  useGetActivitiesByDateQuery,
-  useGetActivitiesByTargetGrpQuery,
-  useGetCategoriesQuery,
-  useGetGeneralQuery,
-  useGetIdeasQuery,
-  useGetNewsQuery,
-  useGetOrganizationsQuery,
-  useGetOrgBySearchValQuery,
-} from 'store/api'
-import { setDrawer } from 'store/generalSlice'
+import { useGetCategoriesQuery, useGetGeneralQuery } from 'store/api'
+import { setCurrentPage, setDrawer } from 'store/generalSlice'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -24,26 +15,58 @@ export const useCategories = (selectedCategory) => {
   return { selectedCategories, isLoading }
 }
 
-export const useOrganizations = (categoryId) => {
-  const { data, isLoading } = useGetOrganizationsQuery(categoryId)
+export const useData = (query, value = '') => {
+  const [items, setItems] = React.useState([])
+  const page = useAppSelector((state) => state.general.currentPage)
 
-  const organizations = data ?? []
+  const queryParams = { key: value, page }
+  const { data, ...keys } = query(queryParams)
 
-  return { organizations, isLoading } as any
+  React.useEffect(() => {
+    if (page === 1) {
+      setItems(data?.data)
+    }
+    setItems((prevState) => [...new Set(prevState?.concat([...data.data]))])
+  }, [data])
+
+  return { items, lp: data?.lastPage ?? 1, ...keys }
 }
 
-export const useIdeas = () => {
-  const { data } = useGetIdeasQuery({})
+export const usePage = () => {
+  const page = useAppSelector((state) => state.general.currentPage)
+  const dispatch = useAppDispatch()
 
-  const ideas = data ?? []
+  useEffect(() => {
+    return () => {
+      dispatch(setCurrentPage(1))
+    }
+  }, [])
 
-  return { ideas } as any
+  const incPage = () => dispatch(setCurrentPage(page + 1))
+
+  return { page, incPage }
 }
 
-export const useSettings = () => {
-  const appTheme = useAppSelector((state) => state.settings)
+export const useDrawer = () => {
+  const dispatch = useAppDispatch()
+  const drawerStatus = useAppSelector((state) => state.general.drawerStatus)
+  const toggleDrawer = () => dispatch(setDrawer(!drawerStatus))
+  const closeDrawer = () => dispatch(setDrawer(false))
+  const openDrawer = () => dispatch(setDrawer(true))
 
-  return { appTheme }
+  return {
+    drawerStatus,
+    toggleDrawer,
+    closeDrawer,
+    openDrawer,
+  }
+}
+
+export const useGeneral = () => {
+  const { data, isLoading } = useGetGeneralQuery({})
+
+  const generalData = data ?? {}
+  return { generalData, isLoading }
 }
 
 export const useCalenderLocales = () => {
@@ -92,48 +115,7 @@ export const useCalenderLocales = () => {
   }, [])
 }
 
-export const useActivities = (group) => {
-  const { data } = useGetActivitiesByTargetGrpQuery(group)
-  const activities = data ?? []
-  return { activities } as any
-}
-
-export const useActivitiesByDate = (date) => {
-  const { data } = useGetActivitiesByDateQuery(date ?? '')
-  const activities = data ?? []
-  return { activities } as any
-}
-
-export const useNews = () => {
-  const { data } = useGetNewsQuery({})
-  const news = data ?? []
-  return { news } as any
-}
-
-export const useOrganizationsBySearchVal = (searchValue) => {
-  const { data, isLoading } = useGetOrgBySearchValQuery(searchValue)
-  const organizations = data ?? []
-  return { organizations, isLoading } as any
-}
-
-export const useDrawer = () => {
-  const dispatch = useAppDispatch()
-  const drawerStatus = useAppSelector((state) => state.general.drawerStatus)
-  const toggleDrawer = () => dispatch(setDrawer(!drawerStatus))
-  const closeDrawer = () => dispatch(setDrawer(false))
-  const openDrawer = () => dispatch(setDrawer(true))
-
-  return {
-    drawerStatus,
-    toggleDrawer,
-    closeDrawer,
-    openDrawer,
-  }
-}
-
-export const useGeneral = () => {
-  const { data, isLoading } = useGetGeneralQuery({})
-
-  const generalData = data ?? {}
-  return { generalData, isLoading }
+export const useSettings = () => {
+  const appTheme = useAppSelector((state) => (state as any).settings)
+  return { appTheme }
 }

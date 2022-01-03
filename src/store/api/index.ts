@@ -5,51 +5,78 @@ export const wegwijsApi = createApi({
   reducerPath: 'wegwijsApi',
   baseQuery: createBaseQuery(),
   endpoints: (build) => ({
+    // GET GENERAL
+    getGeneral: build.query({
+      query: () => ({ url: `general` }),
+    }),
+
     // GET CATEGORIES
     getCategories: build.query({
       query: () => ({ url: `categories` }),
       transformResponse: (response: any) => response.data,
     }),
 
-    // GET ACTIVITIES BY TARGET GROUP
-    getActivitiesByTargetGrp: build.query({
-      query: (group) => ({ url: `activities?filter[target_group]=${group ?? ''}` }),
-      transformResponse: (response: any) => response.data,
-    }),
-
-    getActivitiesByDate: build.query({
-      query: (date) => ({ url: `activities?filter[date]=${date}` }),
-      transformResponse: (response: any) => response.data,
-    }),
+    //----------------------------------------------------------------------------------
+    // QUERIES WITH PARAMS
 
     // GET ORGANIZATIONS
     getOrganizations: build.query({
-      query: (categoryId) => ({ url: `organizations?filter[category]=${categoryId}` }),
-      transformResponse: (response: any) => response.data,
+      query: ({ key, page }) => ({
+        url: `organizations?filter[category]=${key}&page[number]=${page ?? 1}`,
+      }),
+      transformResponse: (response: any) => ({
+        data: response.data,
+        lastPage: response.meta.page.lastPage,
+      }),
+    }),
+
+    // GET ACTIVITIES BY TARGET GROUP
+    getActivitiesByTargetGrp: build.query({
+      query: ({ key, page }) => ({
+        url: `activities?filter[target_group]=${key ?? ''}&page[number]=${page ?? 1}`,
+      }),
+      transformResponse: (response: any) => ({
+        data: response.data,
+        lastPage: response.meta.page.lastPage,
+      }),
+    }),
+
+    getActivitiesByDate: build.query({
+      query: ({ key, page }) => ({
+        url: `activities?filter[date]=${key}&page[number]=${page ?? 1}`,
+      }),
+      transformResponse: (response: any) => ({
+        data: response.data,
+        lastPage: response.meta.page.lastPage,
+      }),
+    }),
+
+    getOrgBySearchVal: build.query({
+      query: ({ key, page }) => ({
+        url: `organizations?filter[search]=${key}&page[number]=${page ?? 1}`,
+      }),
+      transformResponse: (response: any) => ({
+        data: response.data,
+        lastPage: response.meta.page.lastPage,
+      }),
     }),
 
     // GET IDEAS
     getIdeas: build.query({
-      query: () => ({ url: `ideas` }),
-      transformResponse: (response: any) => response.data,
-    }),
-
-    getOrgBySearchVal: build.query({
-      query: (searchValue) => ({
-        url: `organizations?filter[search]=${searchValue}`,
+      query: ({ page }) => ({ url: `ideas?page[number]=${page ?? 1}` }),
+      transformResponse: (response: any) => ({
+        data: response.data,
+        lastPage: response.meta.page.lastPage,
       }),
-      transformResponse: (response: any) => response.data,
-    }),
-
-    // GET GENERAL
-    getGeneral: build.query({
-      query: () => ({ url: `general` }),
     }),
 
     // GET NEWS
     getNews: build.query({
-      query: () => ({ url: `news-articles` }),
-      transformResponse: (response: any) => response.data,
+      query: ({ page }) => ({ url: `news-articles?page[number]=${page ?? 1}` }),
+      transformResponse: (response: any) => ({
+        data: response.data,
+        lastPage: response.meta.page.lastPage,
+      }),
     }),
   }),
 })

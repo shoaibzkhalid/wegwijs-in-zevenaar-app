@@ -1,18 +1,24 @@
 import React, { Fragment, useState } from 'react'
 import { TouchableOpacity } from 'react-native'
+import { useGetOrgBySearchValQuery } from 'store/api'
 import styled from 'styled-components/native'
 import { IMAGES } from 'theme'
 import { TextMedium, TouchCard } from 'theme/common.styles'
-import { useOrganizationsBySearchVal } from 'utils/hooks'
+import { useData } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 import { Loader } from './Loader'
 
 export const Footer = () => {
   const [searchValue, setSearchValue] = useState('')
   const [searchClicked, setSearchClicked] = useState(false)
-  const { organizations, isLoading } = useOrganizationsBySearchVal(
-    searchClicked ? searchValue : ''
-  )
+  const [page, setPage] = React.useState(1)
+
+  const params = {
+    searchValue: searchClicked ? searchValue : '',
+    page,
+  }
+  const { organizations, isLoading } = useData(useGetOrgBySearchValQuery, params)
+
   const { navigation } = useAppNavigation()
 
   const inputRef = React.useRef<HTMLInputElement>(null)

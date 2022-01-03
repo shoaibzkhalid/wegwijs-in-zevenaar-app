@@ -1,21 +1,22 @@
+import { CustomList } from 'component/CustomList'
 import Wrapper from 'component/Wrapper'
 import dayjs from 'dayjs'
 import React, { Fragment } from 'react'
 import { View, Text } from 'react-native'
-import { Calendar, CalendarList } from 'react-native-calendars'
-import { ScrollView } from 'react-native-gesture-handler'
-import { heightPercentageToDP } from 'react-native-responsive-screen'
-import { COLORS } from 'theme'
+import { Calendar } from 'react-native-calendars'
 import { Heading, NewsCard, TextMedium, TouchCard } from 'theme/common.styles'
-import { useActivitiesByDate, useCalenderLocales } from 'utils/hooks'
+import { useActivitiesByDate, useCalenderLocales, useData } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 
 export const ActivityCalendar = () => {
   useCalenderLocales()
   const { navigation } = useAppNavigation()
-
   const [selectedDate, setSelectedDate] = React.useState('')
-  const { activities } = useActivitiesByDate(selectedDate)
+
+  const { items, isLoading, lp, isFetching } = useData(
+    useGetActivitiesByDateQuery,
+    selectedDate
+  )
 
   const getMarkedDates = (date) => {
     return { [date]: { selected: true, selectedColor: 'blue' } }
@@ -23,31 +24,38 @@ export const ActivityCalendar = () => {
 
   return (
     <Wrapper>
-      <ScrollView style={{ marginBottom: heightPercentageToDP(15) }}>
-        <Heading>Activiteiten</Heading>
+      {items.length > 0 && (
+        <Fragment>
+          <CustomList
+            ListHeaderComponent={() => (
+              <Fragment>
+                <Heading>Activiteiten</Heading>
 
-        <Calendar
-          style={{ margin: 10 }}
-          onDayPress={(date) => setSelectedDate(date.dateString)}
-          current={selectedDate}
-          markedDates={getMarkedDates(selectedDate)}
-        />
-        {selectedDate ? (
-          <NewsCard style={{ backgroundColor: '#494c23' }}>
-            <TextMedium color="white" style={{ textAlign: 'center' }}>
-              {dayjs(selectedDate).format('DD-MM-YYYY')}
-            </TextMedium>
-          </NewsCard>
-        ) : (
-          <NewsCard>
-            <TextMedium>Selecteer een datum</TextMedium>
-          </NewsCard>
-        )}
-
-        {activities.length > 0 && (
-          <Fragment>
-            {activities.map((activity) => {
-              const { attributes, id } = activity
+                <Calendar
+                  style={{ margin: 10 }}
+                  onDayPress={(date) => setSelectedDate(date.dateString)}
+                  current={selectedDate}
+                  markedDates={getMarkedDates(selectedDate)}
+                />
+                {selectedDate ? (
+                  <NewsCard style={{ backgroundColor: '#494c23' }}>
+                    <TextMedium color="white" style={{ textAlign: 'center' }}>
+                      {dayjs(selectedDate).format('DD-MM-YYYY')}
+                    </TextMedium>
+                  </NewsCard>
+                ) : (
+                  <NewsCard>
+                    <TextMedium>Selecteer een datum</TextMedium>
+                  </NewsCard>
+                )}
+              </Fragment>
+            )}
+            data={items}
+            isLoading={isLoading}
+            isFetching={isFetching}
+            lastPage={lp}
+            renderItem={({ item }) => {
+              const { attributes, id } = item
               const { name, start_date, end_date, short_description } = attributes
               return (
                 <TouchCard
@@ -67,10 +75,10 @@ export const ActivityCalendar = () => {
                   <TextMedium color={'#494c23'}>{short_description}</TextMedium>
                 </TouchCard>
               )
-            })}
-          </Fragment>
-        )}
-      </ScrollView>
+            }}
+          />
+        </Fragment>
+      )}
     </Wrapper>
   )
 }
