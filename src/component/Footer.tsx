@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { useGetOrgBySearchValQuery } from 'store/api'
 import styled from 'styled-components/native'
@@ -6,18 +6,15 @@ import { IMAGES } from 'theme'
 import { TextMedium, TouchCard } from 'theme/common.styles'
 import { useData } from 'utils/hooks'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
-import { Loader } from './Loader'
+import { CustomList } from './CustomList'
 
 export const Footer = () => {
   const [searchValue, setSearchValue] = useState('')
   const [searchClicked, setSearchClicked] = useState(false)
-  const [page, setPage] = React.useState(1)
 
-  const params = {
-    searchValue: searchClicked ? searchValue : '',
-    page,
-  }
-  const { organizations, isLoading } = useData(useGetOrgBySearchValQuery, params)
+  const value = searchClicked ? searchValue : ''
+
+  const { items, isLoading, lp, isFetching } = useData(useGetOrgBySearchValQuery, value)
 
   const { navigation } = useAppNavigation()
 
@@ -27,47 +24,52 @@ export const Footer = () => {
     inputRef?.current.focus()
   }, [])
 
+  // console.log('searchValue', searchValue)
+
   return (
-    <>
-      <SearchBar onPress={() => navigation.navigate('OrganizationsList')}>
-        <SearchBarInput
-          placeholder="Zoeken op onderwerp & organisaties"
-          ref={inputRef as any}
-          onChange={(e) => {
-            setSearchClicked(false)
-            setSearchValue(e.nativeEvent.text)
-          }}
-          autoCapitalize="none"
-        />
+    <CustomList
+      data={items}
+      ListHeaderComponent={React.useCallback(
+        () => (
+          <SearchBar onPress={() => navigation.navigate('OrganizationsList')}>
+            <SearchBarInput
+              placeholder="Zoeken op onderwerp & organisaties"
+              ref={inputRef as any}
+              onChange={(e) => {
+                setSearchClicked(false)
+                setSearchValue(e.nativeEvent.text)
+              }}
+              autoCapitalize="none"
+            />
 
-        <TouchableOpacity onPress={() => setSearchClicked(true)}>
-          <SearchIcon source={IMAGES.searchIcon} />
-        </TouchableOpacity>
-      </SearchBar>
-
-      {isLoading && searchValue ? (
-        <Loader />
-      ) : (
-        <Fragment>
-          {organizations.map((organization) => {
-            const { attributes, id } = organization
-            const { name } = attributes
-            return (
-              <TouchCard
-                key={id}
-                onPress={() =>
-                  navigation.navigate('OrganizationDetail', {
-                    organization,
-                  })
-                }
-              >
-                <TextMedium>{name}</TextMedium>
-              </TouchCard>
-            )
-          })}
-        </Fragment>
+            <TouchableOpacity onPress={() => setSearchClicked(true)}>
+              <SearchIcon source={IMAGES.searchIcon} />
+            </TouchableOpacity>
+          </SearchBar>
+        ),
+        []
       )}
-    </>
+      isLoading={Boolean(isLoading && !searchValue)}
+      isFetching={isFetching}
+      lastPage={lp}
+      renderItem={({ item }) => {
+        const { attributes, id } = item
+        const { name } = attributes
+
+        return (
+          <TouchCard
+            key={id}
+            onPress={() =>
+              navigation.navigate('OrganizationDetail', {
+                organization: item,
+              })
+            }
+          >
+            <TextMedium>{name}</TextMedium>
+          </TouchCard>
+        )
+      }}
+    />
   )
 }
 

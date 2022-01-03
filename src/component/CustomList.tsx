@@ -2,9 +2,7 @@ import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import { Loader } from './Loader'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import { setCurrentPage } from 'store/generalSlice'
-import { useAppDispatch, useAppSelector, usePage } from 'utils/hooks'
-import { CenterAlignText } from 'theme/common.styles'
+import { usePage } from 'utils/hooks'
 
 type Props = {
   isLoading: boolean
@@ -16,13 +14,11 @@ type Props = {
 }
 
 export const CustomList = (props: Props) => {
-  const { isLoading, renderItem, data, lastPage, ListHeaderComponent } = props
-  const { isFetching } = props
+  const { isLoading, renderItem, data, lastPage } = props
+  const { isFetching, ListHeaderComponent } = props
   const { page, incPage } = usePage()
-  useAppSelector
 
-  const dispatch = useAppDispatch()
-
+  // console.log('test', isLoading, isFetching)
   return (
     <FlatList
       data={data}
@@ -38,13 +34,7 @@ export const CustomList = (props: Props) => {
           incPage()
         }
       }}
-      ListFooterComponent={() =>
-        isFetching ? (
-          <Loader />
-        ) : (
-          <CenterAlignText>Je hebt het einde van de lijst bereikt</CenterAlignText>
-        )
-      }
+      ListFooterComponent={() => (!isLoading && isFetching ? <Loader /> : null)}
     />
   )
 }

@@ -7,6 +7,7 @@ import { Header } from 'component/Header'
 import { drawerOpts } from 'utils/hooks/constants'
 import { useAppNavigation } from 'utils/hooks/useAppNavigation'
 import { useDrawer } from 'utils/hooks'
+import { Divider } from 'react-native-paper'
 
 export const DrawerContent = () => {
   const { navigation } = useAppNavigation()
@@ -16,6 +17,7 @@ export const DrawerContent = () => {
     <DrawerContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header noBack />
+        <Divider />
         {drawerOpts.map((opt) => (
           <TouchRowContainer
             onPress={() => {

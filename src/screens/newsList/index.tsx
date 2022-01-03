@@ -26,7 +26,17 @@ export const NewsList = () => {
         isLoading={isLoading}
         isFetching={isFetching}
         lastPage={lp}
-        ListHeaderComponent={() => <Heading>{patchedNews.title}</Heading>}
+        ListHeaderComponent={() => (
+          <>
+            <Heading>{patchedNews.title}</Heading>
+
+            <NewsCard>
+              <TextNormal color={'#494c23'}>
+                Ga naar de website www.wegwijsinzevenaar.nl en dien je idee in.
+              </TextNormal>
+            </NewsCard>
+          </>
+        )}
         renderItem={({ item }) => {
           const { attributes, id } = item
           const { name, start_date, end_date, short_description } = attributes
@@ -49,12 +59,6 @@ export const NewsList = () => {
         mooier te maken. Misschien kunt u helpen een of meerdere ideeën te realiseren. U heeft
         ook de mogelijkheid om als inwoner, buurt of groep een mooi idee in te dienen.
       </ParaText> */}
-
-      <NewsCard>
-        <TextNormal color={'#494c23'}>
-          Ga naar de website www.wegwijsinzevenaar.nl en dien je idee in.
-        </TextNormal>
-      </NewsCard>
     </Wrapper>
   )
 }

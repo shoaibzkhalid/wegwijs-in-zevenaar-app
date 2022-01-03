@@ -4,7 +4,6 @@ import Wrapper from 'component/Wrapper'
 import { Subject } from 'models/generalTypes'
 import React, { Fragment } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Headline } from 'react-native-paper'
 import styled from 'styled-components/native'
 import { COLORS } from 'theme'
 import { Heading, TextMedium } from 'theme/common.styles'
@@ -69,11 +68,6 @@ const PostTitle = styled.Text`
   color: #494c23;
   font-weight: bold;
   font-size: 18px;
-`
-
-const HugeText = styled(Headline)`
-  padding: 15px 0px 5px 5px;
-  color: white;
 `
 
 const MediumText = styled(TextMedium)`

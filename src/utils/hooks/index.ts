@@ -22,6 +22,8 @@ export const useData = (query, value = '') => {
   const queryParams = { key: value, page }
   const { data, ...keys } = query(queryParams)
 
+  // console.log('data query', queryParams, data)
+
   React.useEffect(() => {
     if (page === 1) {
       setItems(data?.data)

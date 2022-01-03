@@ -1,9 +1,8 @@
 import { useRoute } from '@react-navigation/native'
+import { CustomList } from 'component/CustomList'
 import Wrapper from 'component/Wrapper'
 import dayjs from 'dayjs'
-import React from 'react'
-import { ScrollView } from 'react-native-gesture-handler'
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import React, { Fragment } from 'react'
 import { useGetActivitiesByTargetGrpQuery } from 'store/api'
 import { COLORS } from 'theme'
 import { Heading, NewsCard, ParaText, TextMedium, TextNormal } from 'theme/common.styles'
@@ -12,14 +11,11 @@ import { useData } from 'utils/hooks'
 
 export const ActivitiesList = () => {
   const { target } = useRoute().params as any
-  const [page, setPage] = React.useState(1)
 
-  const params = {
-    group: target.targetGroup,
-    page,
-  }
-
-  const { activities } = useData(useGetActivitiesByTargetGrpQuery, params)
+  const { items, isLoading, lp, isFetching } = useData(
+    useGetActivitiesByTargetGrpQuery,
+    target.targetGroup
+  )
 
   const patchedActivities = {
     item: {
@@ -33,17 +29,24 @@ export const ActivitiesList = () => {
 
   return (
     <Wrapper>
-      <ScrollView style={{ marginBottom: hp(15) }}>
-        <Heading>Activiteiten</Heading>
-        <ParaText>{target.targetGroupText}</ParaText>
-
-        {activities.map((activity, index) => {
-          const { attributes } = activity
+      <CustomList
+        data={items}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        lastPage={lp}
+        ListHeaderComponent={() => (
+          <Fragment>
+            <Heading>Activiteiten</Heading>
+            <ParaText>{target.targetGroupText}</ParaText>
+          </Fragment>
+        )}
+        renderItem={({ item }) => {
+          const { attributes } = item
           const { name, start_date, start_time, end_time } = attributes
           const { short_description, street, house_number, city } = attributes
 
           return (
-            <NewsCard key={index}>
+            <NewsCard>
               <TextMedium style={{ paddingBottom: 5 }}>{name}</TextMedium>
               <TextMedium style={{ color: COLORS.lightPrimary }}>
                 Op {dayjs(start_date).format('DD-MM-YYYY')} van{' '}
@@ -58,8 +61,8 @@ export const ActivitiesList = () => {
               </TextNormal>
             </NewsCard>
           )
-        })}
-      </ScrollView>
+        }}
+      />
     </Wrapper>
   )
 }

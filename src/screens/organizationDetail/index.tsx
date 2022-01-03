@@ -5,11 +5,16 @@ import styled from 'styled-components/native'
 import { IMAGES, SIZES } from 'theme'
 import { ContactIcon, ContactRow, ContactText, Heading, NewsCard } from 'theme/common.styles'
 import { RenderHTML } from 'react-native-render-html'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { linkMap } from 'utils'
 import * as Linking from 'expo-linking'
+import { ScrollView } from 'react-native'
 
 export const OrganizationDetail = () => {
   const organization = (useRoute().params as any).organization
+
+  // console.log('organization', organization)
+
   const { attributes } = organization
   const { name, phone_number, email, website } = attributes
   const { description, information_title, information_description } = attributes
@@ -19,52 +24,57 @@ export const OrganizationDetail = () => {
 
   return (
     <Wrapper>
-      {organization && <Heading>{name}</Heading>}
+      <ScrollView contentContainerStyle={{ paddingBottom: hp(15) }}>
+        {organization && <Heading>{name}</Heading>}
 
-      <NewsCard>
-        {organization && <PostTitle>{name}</PostTitle>}
-        {street && (
-          <ContactRow onPress={() => linkMap(attributes)}>
-            <ContactIcon source={mapMarkerIcon} />
-            <ContactText>
-              {street +
-                ' ' +
-                house_number +
-                (house_number_addition ? house_number_addition : '') +
-                ', ' +
-                (postal_code ? postal_code + ' ' : '') +
-                (city ? city : '')}
-            </ContactText>
-          </ContactRow>
-        )}
+        <NewsCard>
+          {organization && <PostTitle>{name}</PostTitle>}
+          {street && (
+            <ContactRow onPress={() => linkMap(attributes)}>
+              <ContactIcon source={mapMarkerIcon} />
+              <ContactText>
+                {street +
+                  ' ' +
+                  house_number +
+                  (house_number_addition ? house_number_addition : '') +
+                  ', ' +
+                  (postal_code ? postal_code + ' ' : '') +
+                  (city ? city : '')}
+              </ContactText>
+            </ContactRow>
+          )}
 
-        {phone_number && (
-          <ContactRow onPress={() => Linking.openURL(`tel:${phone_number}`)}>
-            <ContactIcon source={phoneIcon} />
-            <ContactText>{phone_number}</ContactText>
-          </ContactRow>
-        )}
+          {phone_number && (
+            <ContactRow onPress={() => Linking.openURL(`tel:${phone_number}`)}>
+              <ContactIcon source={phoneIcon} />
+              <ContactText>{phone_number}</ContactText>
+            </ContactRow>
+          )}
 
-        {email && (
-          <ContactRow onPress={() => Linking.openURL(`mailto:${email}`)}>
-            <ContactIcon source={envelopeIcon} />
-            <ContactText style={{ paddingLeft: 10 }}>{email}</ContactText>
-          </ContactRow>
-        )}
+          {email && (
+            <ContactRow onPress={() => Linking.openURL(`mailto:${email}`)}>
+              <ContactIcon source={envelopeIcon} />
+              <ContactText style={{ paddingLeft: 10 }}>{email}</ContactText>
+            </ContactRow>
+          )}
 
-        {website && (
-          <ContactRow onPress={() => Linking.openURL(`https:${website}`)}>
-            <ContactIcon source={globeIcon} />
-            <ContactText>{website}</ContactText>
-          </ContactRow>
-        )}
+          {website && (
+            <ContactRow onPress={() => Linking.openURL(`https:${website}`)}>
+              <ContactIcon source={globeIcon} />
+              <ContactText>{website}</ContactText>
+            </ContactRow>
+          )}
 
-        {description && <Heading>{information_title}</Heading>}
+          {description && <Heading>{information_title}</Heading>}
 
-        {information_description && (
-          <RenderHTML source={{ html: information_description }} contentWidth={SIZES.width} />
-        )}
-      </NewsCard>
+          {information_description && (
+            <RenderHTML
+              source={{ html: information_description }}
+              contentWidth={SIZES.width}
+            />
+          )}
+        </NewsCard>
+      </ScrollView>
     </Wrapper>
   )
 }
